@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* BlackAI Design System - Premium Dark Theme */
+
+@layer base {
+  :root {
+    --background: 0 0% 2%;
+    --foreground: 0 0% 98%;
+
+    --card: 0 0% 4%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 0 0% 4%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 2%;
+
+    --secondary: 0 0% 10%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 65%;
+
+    --accent: 45 100% 60%;
+    --accent-foreground: 0 0% 2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 0% 15%;
+    --input: 0 0% 15%;
+    --ring: 45 100% 60%;
+
+    --radius: 0.5rem;
+
+    /* Custom accent colors */
+    --gold: 45 100% 60%;
+    --gold-muted: 45 80% 45%;
+    --purple-glow: 270 60% 50%;
+    --purple-muted: 270 40% 30%;
+
+    /* Gradients */
+    --gradient-gold: linear-gradient(135deg, hsl(45, 100%, 60%), hsl(35, 100%, 50%));
+    --gradient-purple: linear-gradient(135deg, hsl(270, 60%, 50%), hsl(280, 70%, 40%));
+    --gradient-dark: linear-gradient(180deg, hsl(0, 0%, 4%), hsl(0, 0%, 2%));
+
+    /* Shadows */
+    --shadow-glow: 0 0 40px -10px hsl(45, 100%, 60%, 0.3);
+    --shadow-subtle: 0 4px 20px -5px hsl(0, 0%, 0%, 0.5);
+
+    --sidebar-background: 0 0% 4%;
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-primary: 45 100% 60%;
+    --sidebar-primary-foreground: 0 0% 2%;
+    --sidebar-accent: 0 0% 10%;
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-border: 0 0% 15%;
+    --sidebar-ring: 45 100% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Space Grotesk', sans-serif;
+  }
+}
+
+@layer utilities {
+  .text-gradient-gold {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, hsl(45, 100%, 60%), hsl(35, 100%, 50%));
+  }
+
+  .text-gradient-white {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(180deg, hsl(0, 0%, 100%), hsl(0, 0%, 70%));
+  }
+
+  .glow-gold {
+    box-shadow: 0 0 40px -10px hsl(45, 100%, 60%, 0.4);
+  }
+
+  .glow-purple {
+    box-shadow: 0 0 40px -10px hsl(270, 60%, 50%, 0.4);
+  }
+
+  .border-gradient {
+    border: 1px solid transparent;
+    background: linear-gradient(var(--background), var(--background)) padding-box,
+                linear-gradient(135deg, hsl(0, 0%, 30%), hsl(0, 0%, 10%)) border-box;
+  }
+
+  .glass {
+    @apply bg-background/80 backdrop-blur-xl;
+  }
+
+  .glass-card {
+    @apply bg-card/50 backdrop-blur-lg border border-border/50;
+  }
+}
