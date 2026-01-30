@@ -15,19 +15,19 @@ const contactInfo = [
   {
     icon: Mail,
     label: 'Email',
-    value: 'hello@blackai.com',
-    href: 'mailto:hello@blackai.com',
+    value: 'info@blackai.in',
+    href: 'mailto:info@blackai.in',
   },
   {
     icon: Phone,
     label: 'Phone',
-    value: '+1 (555) 123-4567',
+    value: '+91 9975473730',
     href: 'tel:+15551234567',
   },
   {
     icon: MapPin,
     label: 'Location',
-    value: 'San Francisco, CA',
+    value: 'Nagpur, Maharashtra, India',
     href: null,
   },
 ];
@@ -286,7 +286,7 @@ const Contact = () => {
                   <div className="absolute inset-0 flex items-center justify-center">
                     <div className="text-center">
                       <MapPin className="w-8 h-8 mx-auto mb-2 text-muted-foreground" />
-                      <p className="text-muted-foreground">San Francisco, CA</p>
+                      <p className="text-muted-foreground">Nagpur, Maharashtra, India</p>
                     </div>
                   </div>
                   {/* Grid pattern overlay */}

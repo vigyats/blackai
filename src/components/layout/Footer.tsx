@@ -99,9 +99,9 @@ export const Footer = () => {
               Get in Touch
             </h4>
             <ul className="space-y-3 text-sm text-muted-foreground">
-              <li>hello@blackai.com</li>
-              <li>+1 (555) 123-4567</li>
-              <li>San Francisco, CA</li>
+              <li>info@blackai.in</li>
+              <li>+91 9975473730</li>
+              <li>Nagpur, Maharashtra, India</li>
             </ul>
           </div>
         </div>

@@ -55,10 +55,10 @@ const timeline = [
 ];
 
 const team = [
-  { name: 'Alexandra Chen', role: 'CEO & Co-founder', image: null },
-  { name: 'Marcus Williams', role: 'CTO & Co-founder', image: null },
-  { name: 'Sarah Johnson', role: 'Head of AI Research', image: null },
-  { name: 'David Park', role: 'VP of Engineering', image: null },
+  { name: 'Vigyat Singh', role: 'CEO & Co-founder', image: null },
+  { name: 'TBD', role: 'CTO & Co-founder', image: null },
+  { name: 'TBD', role: 'Head of AI Research', image: null },
+  { name: 'TBD', role: 'VP of Engineering', image: null },
 ];
 
 const About = () => {

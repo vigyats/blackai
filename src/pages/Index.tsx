@@ -64,7 +64,7 @@ const Index = () => {
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border/50 bg-card/50 backdrop-blur-sm mb-8"
             >
               <SparkleIcon size={16} className="text-accent" />
-              <span className="text-sm text-muted-foreground">Pioneering Agentic AI Solutions</span>
+              <span className="text-sm text-muted-foreground">Perfect AI Solutions</span>
             </motion.div>
 
             {/* Main Headline */}
