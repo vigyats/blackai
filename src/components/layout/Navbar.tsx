@@ -8,9 +8,10 @@ import AnimatedLogo from "@/components/shared/AnimatedLogo";
 const navLinks = [
   { name: 'Home', path: '/' },
   { name: 'Services', path: '/services' },
+  { name: 'Products', path: '/products' },
   { name: 'About', path: '/about' },
   { name: 'Contact', path: '/contact' },
-  { name: 'Products', path: '/products' },
+  
 ];
 
 export const Navbar = () => {
