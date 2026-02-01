@@ -1,11 +1,12 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowUpRight, Linkedin, Twitter, Github } from 'lucide-react';
+import { ArrowUpRight, Linkedin, Instagram, X } from 'lucide-react';
 
 const footerLinks = {
   navigation: [
     { name: 'Home', path: '/' },
     { name: 'Services', path: '/services' },
+    { name: 'Products', path: '/products' },
     { name: 'About', path: '/about' },
     { name: 'Contact', path: '/contact' },
   ],
@@ -15,9 +16,9 @@ const footerLinks = {
     { name: 'AI Consultation', path: '/services#consultation' },
   ],
   social: [
-    { name: 'LinkedIn', icon: Linkedin, href: '#' },
-    { name: 'Twitter', icon: Twitter, href: '#' },
-    { name: 'GitHub', icon: Github, href: '#' },
+    { name: 'LinkedIn', icon: Linkedin, href: 'https://www.linkedin.com/company/blackaii/' },
+    { name: 'X', icon: X, href: 'https://x.com/blackai_in' },
+    { name: 'Instagram', icon: Instagram, href: 'https://www.instagram.com/blackai_in?igsh=MXUzY3oxa3Bmb2Z5cQ==' },
   ],
 };
 
