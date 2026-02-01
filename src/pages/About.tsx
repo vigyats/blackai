@@ -33,32 +33,22 @@ const values = [
 
 const timeline = [
   {
-    year: '2021',
+    year: '2025',
     title: 'The Beginning',
     description: 'Founded by AI researchers with a vision to make autonomous AI accessible to enterprises.',
   },
   {
-    year: '2022',
+    year: '2026',
     title: 'First Major Deployment',
     description: 'Launched our first enterprise-scale AI agent system, automating complex workflows.',
-  },
-  {
-    year: '2023',
-    title: 'Rapid Growth',
-    description: 'Expanded to serve 50+ enterprise clients across multiple industries.',
-  },
-  {
-    year: '2024',
-    title: 'Industry Leadership',
-    description: 'Recognized as a leader in agentic AI solutions with groundbreaking deployments.',
   },
 ];
 
 const team = [
-  { name: 'Vigyat Singh', role: 'CEO & Co-founder', image: null },
-  { name: 'TBD', role: 'CTO & Co-founder', image: null },
-  { name: 'TBD', role: 'Head of AI Research', image: null },
-  { name: 'TBD', role: 'VP of Engineering', image: null },
+  { name: 'Vigyat', role: 'CEO & Co-founder', image: null },
+  { name: 'Vaishnavi Bais', role: 'CMO & Co-founder', image: null },
+  { name: 'Tanaya', role: 'COO & Co-founder', image: null },
+  { name: 'Suraj', role: 'CTO & Co-founder', image: null },
 ];
 
 const About = () => {
