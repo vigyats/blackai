@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, Send, Linkedin, Twitter, Github, CheckCircle } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, Linkedin, Instagram, X, CheckCircle } from 'lucide-react';
 import { Layout } from '@/components/layout/Layout';
 import { FloatingShapes } from '@/components/shared/FloatingShapes';
 import { AnimatedSection } from '@/components/shared/AnimatedSection';
@@ -33,9 +33,9 @@ const contactInfo = [
 ];
 
 const socialLinks = [
-  { icon: Linkedin, label: 'LinkedIn', href: '#' },
-  { icon: Twitter, label: 'Twitter', href: '#' },
-  { icon: Github, label: 'GitHub', href: '#' },
+  { icon: Linkedin, label: 'LinkedIn', href: 'https://www.linkedin.com/company/blackaii/' },
+  { icon: X, label: 'X', href: 'https://x.com/blackai_in' },
+  { icon: Instagram, label: 'Instagram', href: 'https://www.instagram.com/blackai_in?igsh=MXUzY3oxa3Bmb2Z5cQ==' },
 ];
 
 const Contact = () => {
