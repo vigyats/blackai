@@ -23,6 +23,7 @@ const allProducts = [
       'Use‑case based matching',
       'Integration compatibility scoring',
     ],
+    link: 'https://your-find-ai-link.com',
   },
   // Add more products here in future
 ];
@@ -160,7 +161,7 @@ const Products = () => {
                     <Card
                       key={product.id}
                       className="p-6 bg-card/50 border-border/50 hover:bg-card/70 transition-colors cursor-pointer"
-                      onClick={() => window.open('https://your-product-link.com', '_blank')}
+                      onClick={() => window.open(product.link, '_blank')}
                     >
                       <div className="flex items-center gap-3 mb-4">
                         <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center">
