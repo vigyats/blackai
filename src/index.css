@@ -128,11 +128,7 @@
 .line {
   animation-delay: 1.2s;
 }
-.logo-path {
-  stroke-dasharray: 1000;
-  stroke-dashoffset: 1000;
-  animation: draw 2s linear forwards;
-}
+
 @keyframes drawLogo {
   to {
     stroke-dashoffset: 0;
