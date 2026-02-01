@@ -1,28 +1,12 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { 
-  Bot, 
-  Workflow, 
-  Sparkles, 
-  ArrowRight, 
-  Cpu, 
-  Brain, 
-  Cog, 
-  MessageSquare, 
-  FileSearch, 
-  TrendingUp,
-  CheckCircle2
-} from 'lucide-react';
+import { Bot, ArrowRight, CheckCircle2 } from 'lucide-react';
 import { Layout } from '@/components/layout/Layout';
 import { FloatingShapes } from '@/components/shared/FloatingShapes';
 import { AnimatedSection } from '@/components/shared/AnimatedSection';
 import { SparkleIcon } from '@/components/shared/SparkleIcon';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-
-
-
-
 
 const Products = () => {
   return (
@@ -65,85 +49,6 @@ const Products = () => {
         </div>
       </section>
 
-      {/* Products Detail */}
-      {mainProducts.map((product, index) => (
-        <section
-          key={product.id}
-          id={product.id}
-          className={`py-24 ${index % 2 === 1 ? 'bg-card/30' : ''}`}
-        >
-          <div className="container mx-auto px-6">
-            <div
-              className={`grid lg:grid-cols-2 gap-16 items-center ${
-                index % 2 === 1 ? 'lg:flex-row-reverse' : ''
-              }`}
-            >
-              <AnimatedSection className={index % 2 === 1 ? 'lg:order-2' : ''}>
-                <div className="inline-flex items-center gap-3 mb-6">
-                  <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center">
-                    <product.icon className="w-6 h-6 text-accent" />
-                  </div>
-                  <span className="text-sm text-muted-foreground uppercase tracking-wider">
-                    {product.subtitle}
-                  </span>
-                </div>
-
-                <h2 className="text-3xl md:text-4xl font-display font-bold mb-6">
-                  {product.title}
-                </h2>
-
-                <p className="text-muted-foreground leading-relaxed mb-8">
-                  {product.description}
-                </p>
-
-                <div className="grid sm:grid-cols-2 gap-3 mb-8">
-                  {product.features.map((feature) => (
-                    <div key={feature} className="flex items-center gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-accent flex-shrink-0" />
-                      <span className="text-sm">{feature}</span>
-                    </div>
-                  ))}
-                </div>
-
-                <Button asChild className="bg-foreground text-background hover:bg-foreground/90">
-                  <Link to="/contact" className="flex items-center gap-2">
-                    Get Started
-                    <ArrowRight size={16} />
-                  </Link>
-                </Button>
-              </AnimatedSection>
-
-              <AnimatedSection delay={0.2} className={index % 2 === 1 ? 'lg:order-1' : ''}>
-                <div className="relative">
-                  <Card className="p-8 bg-card/50 border-border/50">
-                    <h4 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-6">
-                      Use Cases
-                    </h4>
-                    <div className="space-y-4">
-                      {product.useCases.map((useCase) => (
-                        <motion.div
-                          key={useCase.label}
-                          whileHover={{ x: 8 }}
-                          className="flex items-center gap-4 p-4 rounded-xl bg-secondary/30 hover:bg-secondary/50 transition-colors cursor-pointer"
-                        >
-                          <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center">
-                            <useCase.icon className="w-5 h-5 text-accent" />
-                          </div>
-                          <span className="font-medium">{useCase.label}</span>
-                          <ArrowRight className="w-4 h-4 ml-auto text-muted-foreground" />
-                        </motion.div>
-                      ))}
-                    </div>
-                  </Card>
-                  {/* Decorative gradient */}
-                  <div className="absolute -inset-4 bg-gradient-to-r from-accent/5 via-transparent to-purple-glow/5 rounded-3xl -z-10 blur-2xl" />
-                </div>
-              </AnimatedSection>
-            </div>
-          </div>
-        </section>
-      ))}
-
       {/* Big "Find AI" Card */}
       <section className="py-24">
         <div className="container mx-auto px-6">
@@ -179,38 +84,6 @@ const Products = () => {
               </div>
             </Card>
           </motion.div>
-        </div>
-      </section>
-
-      {/* Process Section */}
-      <section className="py-24 border-t border-border/30">
-        <div className="container mx-auto px-6">
-          <AnimatedSection className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
-              Our <span className="text-gradient-gold">Process</span>
-            </h2>
-            <p className="text-muted-foreground max-w-xl mx-auto">
-              A proven methodology for delivering AI products that work.
-            </p>
-          </AnimatedSection>
-
-          <div className="grid md:grid-cols-4 gap-8">
-            {processSteps.map((step, index) => (
-              <AnimatedSection key={step.step} delay={index * 0.1}>
-                <div className="relative">
-                  <div className="text-6xl font-display font-bold text-secondary/50 mb-4">
-                    {step.step}
-                  </div>
-                  <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
-                  <p className="text-muted-foreground text-sm">{step.description}</p>
-
-                  {index < processSteps.length - 1 && (
-                    <div className="hidden md:block absolute top-8 left-full w-full h-px bg-border/50 -translate-x-1/2" />
-                  )}
-                </div>
-              </AnimatedSection>
-            ))}
-          </div>
         </div>
       </section>
 
