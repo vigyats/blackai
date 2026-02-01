@@ -104,7 +104,7 @@ const Products = () => {
               >
                 <Card
                   className="p-10 text-center cursor-pointer group"
-                  onClick={() => window.open('https://your-find-ai-link.com', '_blank')}
+                  onClick={() => window.open('https://findai-pdpz.onrender.com/', '_blank')}
                 >
                   <div className="w-16 h-16 rounded-2xl bg-accent/10 flex items-center justify-center mx-auto mb-6">
                     <Bot className="w-8 h-8 text-accent" />
@@ -112,7 +112,7 @@ const Products = () => {
 
                   <h3 className="text-2xl font-display font-bold mb-2">Find AI</h3>
                   <p className="text-muted-foreground mb-6">
-                    AI‑powered discovery engine for agents, tools, and workflows tailored to your stack.
+                    AI‑powered discovery engine for agents, tools, and workflows tailored to your stack (Its FREE to use).
                   </p>
 
                   <div className="inline-flex items-center gap-2 text-accent font-medium group-hover:gap-3 transition-all">
