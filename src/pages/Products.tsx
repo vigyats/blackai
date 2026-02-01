@@ -20,81 +20,9 @@ import { SparkleIcon } from '@/components/shared/SparkleIcon';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 
-const mainProducts = [
-  {
-    id: 'find-ai',
-    icon: Bot,
-    title: 'Find AI',
-    subtitle: 'AI‑Powered Discovery Engine',
-    description:
-      'Find AI helps you discover the right AI tools, agents, and workflows for your specific use case. ' +
-      'From customer service to research and automation, Find AI surfaces the best solutions and integrations.',
-    features: [
-      'Smart recommendation engine',
-      'Use‑case based matching',
-      'Integration compatibility scoring',
-      'Performance and cost comparison',
-      'Real‑time market updates',
-      'Custom fit score for your stack',
-    ],
-    useCases: [
-      { icon: MessageSquare, label: 'Customer Service Stack' },
-      { icon: FileSearch, label: 'Research Tooling' },
-      { icon: TrendingUp, label: 'Sales & Marketing AI' },
-    ],
-  },
-  {
-    id: 'agent-studio',
-    icon: Workflow,
-    title: 'Agent Studio',
-    subtitle: 'No‑Code Agent Builder',
-    description:
-      'Design, test, and deploy custom AI agents without writing code. ' +
-      'Agent Studio provides a visual interface to define behavior, memory, and integrations.',
-    features: [
-      'Drag‑and‑drop agent design',
-      'Built‑in memory and context',
-      'Pre‑built templates',
-      'Testing sandbox',
-      'Versioning and rollback',
-      'Team collaboration',
-    ],
-    useCases: [
-      { icon: Cog, label: 'Operations Agents' },
-      { icon: FileSearch, label: 'Document Agents' },
-      { icon: Brain, label: 'Decision Agents' },
-    ],
-  },
-  {
-    id: 'workflow-hub',
-    icon: Sparkles,
-    title: 'Workflow Hub',
-    subtitle: 'AI Workflow Marketplace',
-    description:
-      'Browse, customize, and deploy pre‑built AI workflows for common business processes. ' +
-      'From onboarding to sales and support, Workflow Hub accelerates your automation journey.',
-    features: [
-      'Curated workflow library',
-      'One‑click deployment',
-      'Customization options',
-      'Performance analytics',
-      'Community templates',
-      'Enterprise governance',
-    ],
-    useCases: [
-      { icon: Cpu, label: 'IT & DevOps' },
-      { icon: TrendingUp, label: 'Sales & Marketing' },
-      { icon: Brain, label: 'Data & Analytics' },
-    ],
-  },
-];
 
-const processSteps = [
-  { step: '01', title: 'Discover', description: 'Find the right product for your needs' },
-  { step: '02', title: 'Configure', description: 'Customize settings and integrations' },
-  { step: '03', title: 'Test', description: 'Validate in sandbox before going live' },
-  { step: '04', title: 'Deploy', description: 'Roll out with monitoring and support' },
-];
+
+
 
 const Products = () => {
   return (
