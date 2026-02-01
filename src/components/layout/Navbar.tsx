@@ -3,7 +3,6 @@ import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import AnimatedLogo from "@/components/shared/AnimatedLogo";
 
 const navLinks = [
   { name: 'Home', path: '/' },
@@ -47,12 +46,9 @@ export const Navbar = () => {
                 whileHover={{ scale: 1.05 }}
                 className="relative"
               >
-                <Link to="/" className="flex items-center gap-2">
-  <AnimatedLogo />
-  <span className="text-2xl font-display font-bold text-foreground">
-    Black<span className="text-gradient-gold">AI</span>
-  </span>
-</Link>
+                <span className="text-2xl font-display font-bold text-foreground">
+                  Black<span className="text-gradient-gold">AI</span>
+                </span>
               </motion.div>
             </Link>
 
