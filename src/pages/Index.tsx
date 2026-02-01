@@ -28,14 +28,14 @@ const services = [
 ];
 
 const stats = [
-  { value: 150, suffix: '+', label: 'AI Agents Deployed' },
-  { value: 98, suffix: '%', label: 'Client Satisfaction' },
-  { value: 50, suffix: 'M+', label: 'Tasks Automated' },
+  { value: 2, suffix: ' ', label: 'AI Agents Deployed' },
+  { value: 100, suffix: '%', label: 'Client Satisfaction' },
+  { value: 1, suffix: 'k+', label: 'Tasks Automated' },
   { value: 24, suffix: '/7', label: 'Autonomous Operation' },
 ];
 
 const trustedLogos = [
-  'TechCorp', 'InnovateLab', 'FutureAI', 'DataFlow', 'SmartSys', 'QuantumTech',
+  ' ', ' ', ' ', ' ', ' ', ' ',
 ];
 
 const Index = () => {
