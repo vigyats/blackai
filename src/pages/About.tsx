@@ -49,6 +49,7 @@ const team = [
   { name: 'Vaishnavi Bais', role: 'CMO & Co-founder', image: null },
   { name: 'Tanaya', role: 'COO & Co-founder', image: null },
   { name: 'Suraj', role: 'CTO & Co-founder', image: null },
+  { name: 'Shreyash', role: 'CFO & Co-founder', image: null },
 ];
 
 const About = () => {
