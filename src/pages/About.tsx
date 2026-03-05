@@ -45,7 +45,7 @@ const timeline = [
 ];
 
 const team = [
-  { name: 'Vigyat', role: 'CEO & Co-founder', image: '/team/vigyat.png' },
+  { name: 'Vigyat', role: 'CEO & Co-founder', image: '/vigyat.png' },
   { name: 'Vaishnavi Bais', role: 'CMO & Co-founder', image: null },
   { name: 'Shreyash', role: 'CFO & Co-founder', image: null },
   { name: 'Tanaya', role: 'COO & Co-founder', image: null },
