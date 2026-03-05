@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Search, Shield, Lock, Eye, Database, UserCheck, FileText, AlertCircle, Mail } from 'lucide-react';
+import { Search, Shield, Lock, Eye, Database, UserCheck, FileText, AlertCircle, Mail, ChevronDown } from 'lucide-react';
 import { Layout } from '@/components/layout/Layout';
 import { AnimatedSection } from '@/components/shared/AnimatedSection';
 import { Card } from '@/components/ui/card';
@@ -173,6 +173,14 @@ const PrivacyPolicy = () => {
     );
   };
 
+  const expandAll = () => {
+    setExpandedSections(sections.map(s => s.id));
+  };
+
+  const collapseAll = () => {
+    setExpandedSections([]);
+  };
+
   const filteredSections = sections.filter(section => {
     const searchLower = searchQuery.toLowerCase();
     return (
@@ -255,7 +263,27 @@ const PrivacyPolicy = () => {
       {/* Policy Sections */}
       <section className="py-16">
         <div className="container mx-auto px-6">
-          <div className="max-w-4xl mx-auto space-y-8">
+          <div className="max-w-4xl mx-auto">
+            {/* Expand/Collapse All Button */}
+            <div className="flex justify-end mb-6">
+              {expandedSections.length === filteredSections.length && filteredSections.length > 0 ? (
+                <button
+                  onClick={collapseAll}
+                  className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground border border-border/50 rounded-lg hover:border-border transition-all"
+                >
+                  Collapse All
+                </button>
+              ) : (
+                <button
+                  onClick={expandAll}
+                  className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground border border-border/50 rounded-lg hover:border-border transition-all"
+                >
+                  Expand All
+                </button>
+              )}
+            </div>
+
+            <div className="space-y-8">
             {filteredSections.length > 0 ? (
               filteredSections.map((section, index) => {
                 const isExpanded = expandedSections.includes(section.id);
@@ -275,10 +303,10 @@ const PrivacyPolicy = () => {
                           </div>
                           <motion.div
                             animate={{ rotate: isExpanded ? 180 : 0 }}
-                            transition={{ duration: 0.3 }}
+                            transition={{ duration: 0.3, ease: "easeInOut" }}
                             className="text-muted-foreground"
                           >
-                            ▼
+                            <ChevronDown className="w-5 h-5" />
                           </motion.div>
                         </div>
                         {isExpanded && (
@@ -307,6 +335,7 @@ const PrivacyPolicy = () => {
                 <p className="text-muted-foreground">No results found for "{searchQuery}"</p>
               </Card>
             )}
+            </div>
           </div>
         </div>
       </section>

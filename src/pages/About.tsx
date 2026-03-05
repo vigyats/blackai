@@ -213,19 +213,21 @@ const About = () => {
                   whileHover={{ y: -8 }}
                   className="text-center"
                 >
-                  <div className="w-32 h-32 mx-auto mb-6 rounded-full bg-gradient-to-br from-secondary to-muted flex items-center justify-center overflow-hidden">
-                    {member.image ? (
+                  {member.image ? (
+                    <div className="w-32 h-32 mx-auto mb-6 flex items-center justify-center">
                       <img 
                         src={member.image} 
                         alt={member.name} 
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-contain"
                       />
-                    ) : (
+                    </div>
+                  ) : (
+                    <div className="w-32 h-32 mx-auto mb-6 rounded-full bg-gradient-to-br from-secondary to-muted flex items-center justify-center">
                       <span className="text-3xl font-display font-bold text-muted-foreground">
                         {member.name.split(' ').map(n => n[0]).join('')}
                       </span>
-                    )}
-                  </div>
+                    </div>
+                  )}
                   <h3 className="text-lg font-semibold mb-1">{member.name}</h3>
                   <p className="text-muted-foreground text-sm">{member.role}</p>
                 </motion.div>
