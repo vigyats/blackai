@@ -375,11 +375,10 @@ const TermsOfService = () => {
             <div className="flex items-start gap-4">
               <AlertTriangle className="w-6 h-6 text-accent flex-shrink-0 mt-1" />
               <div>
-                <h3 className="text-lg font-semibold mb-2 text-foreground">Important Refund Policy Notice</h3>
+                <h3 className="text-lg font-semibold mb-2 text-foreground">Important Notice</h3>
                 <p className="text-muted-foreground leading-relaxed">
-                  Please note that advance payments are <strong className="text-foreground">NON-REFUNDABLE</strong> after 
-                  the delivery of a prototype that satisfies all conditions specified in your project agreement. 
-                  Review the Refund and Cancellation Policy section below for complete details.
+                  Please read all Terms of Service carefully before entering into any agreement with BlackAI. 
+                  By using our services, you acknowledge that you have read, understood, and agree to be bound by these terms.
                 </p>
               </div>
             </div>

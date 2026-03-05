@@ -206,7 +206,7 @@ const About = () => {
             </p>
           </AnimatedSection>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-8">
             {team.map((member, index) => (
               <AnimatedSection key={member.name} delay={index * 0.1}>
                 <motion.div 
