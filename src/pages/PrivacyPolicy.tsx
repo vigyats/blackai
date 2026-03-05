@@ -163,14 +163,26 @@ const sections = [
 
 const PrivacyPolicy = () => {
   const [searchQuery, setSearchQuery] = useState('');
+  const [expandedSections, setExpandedSections] = useState<string[]>([]);
 
-  const filteredSections = sections.filter(section =>
-    section.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    section.content.some(item =>
-      item.subtitle.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.text.toLowerCase().includes(searchQuery.toLowerCase())
-    )
-  );
+  const toggleSection = (sectionId: string) => {
+    setExpandedSections(prev =>
+      prev.includes(sectionId)
+        ? prev.filter(id => id !== sectionId)
+        : [...prev, sectionId]
+    );
+  };
+
+  const filteredSections = sections.filter(section => {
+    const searchLower = searchQuery.toLowerCase();
+    return (
+      section.title.toLowerCase().includes(searchLower) ||
+      section.content.some(item =>
+        item.subtitle.toLowerCase().includes(searchLower) ||
+        item.text.toLowerCase().includes(searchLower)
+      )
+    );
+  });
 
   return (
     <Layout>
@@ -245,28 +257,51 @@ const PrivacyPolicy = () => {
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto space-y-8">
             {filteredSections.length > 0 ? (
-              filteredSections.map((section, index) => (
-                <AnimatedSection key={section.id} delay={index * 0.1}>
-                  <Card className="p-8 bg-card/50 border-border/50 hover:border-border transition-all">
-                    <div className="flex items-start gap-4 mb-6">
-                      <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center flex-shrink-0">
-                        <section.icon className="w-6 h-6 text-accent" />
-                      </div>
-                      <div>
-                        <h2 className="text-2xl font-display font-bold mb-2">{section.title}</h2>
-                      </div>
-                    </div>
-                    <div className="space-y-6 ml-16">
-                      {section.content.map((item, idx) => (
-                        <div key={idx}>
-                          <h3 className="text-lg font-semibold mb-2 text-foreground">{item.subtitle}</h3>
-                          <p className="text-muted-foreground leading-relaxed">{item.text}</p>
+              filteredSections.map((section, index) => {
+                const isExpanded = expandedSections.includes(section.id);
+                return (
+                  <AnimatedSection key={section.id} delay={index * 0.1}>
+                    <Card 
+                      className="bg-card/50 border-border/50 hover:border-border transition-all cursor-pointer"
+                      onClick={() => toggleSection(section.id)}
+                    >
+                      <div className="p-8">
+                        <div className="flex items-start gap-4">
+                          <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center flex-shrink-0">
+                            <section.icon className="w-6 h-6 text-accent" />
+                          </div>
+                          <div className="flex-1">
+                            <h2 className="text-2xl font-display font-bold mb-2">{section.title}</h2>
+                          </div>
+                          <motion.div
+                            animate={{ rotate: isExpanded ? 180 : 0 }}
+                            transition={{ duration: 0.3 }}
+                            className="text-muted-foreground"
+                          >
+                            ▼
+                          </motion.div>
                         </div>
-                      ))}
-                    </div>
-                  </Card>
-                </AnimatedSection>
-              ))
+                        {isExpanded && (
+                          <motion.div
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: 'auto', opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.3 }}
+                            className="space-y-6 ml-16 mt-6"
+                          >
+                            {section.content.map((item, idx) => (
+                              <div key={idx}>
+                                <h3 className="text-lg font-semibold mb-2 text-foreground">{item.subtitle}</h3>
+                                <p className="text-muted-foreground leading-relaxed">{item.text}</p>
+                              </div>
+                            ))}
+                          </motion.div>
+                        )}
+                      </div>
+                    </Card>
+                  </AnimatedSection>
+                );
+              })
             ) : (
               <Card className="p-12 text-center bg-card/50 border-border/50">
                 <p className="text-muted-foreground">No results found for "{searchQuery}"</p>

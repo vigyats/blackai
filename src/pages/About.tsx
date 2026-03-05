@@ -45,11 +45,11 @@ const timeline = [
 ];
 
 const team = [
-  { name: 'Vigyat', role: 'CEO & Co-founder', image: null },
+  { name: 'Vigyat', role: 'CEO & Co-founder', image: '/team/vigyat.png' },
   { name: 'Vaishnavi Bais', role: 'CMO & Co-founder', image: null },
+  { name: 'Shreyash', role: 'CFO & Co-founder', image: null },
   { name: 'Tanaya', role: 'COO & Co-founder', image: null },
   { name: 'Suraj', role: 'CTO & Co-founder', image: null },
-  { name: 'Shreyash', role: 'CFO & Co-founder', image: null },
 ];
 
 const About = () => {
@@ -213,10 +213,18 @@ const About = () => {
                   whileHover={{ y: -8 }}
                   className="text-center"
                 >
-                  <div className="w-32 h-32 mx-auto mb-6 rounded-full bg-gradient-to-br from-secondary to-muted flex items-center justify-center">
-                    <span className="text-3xl font-display font-bold text-muted-foreground">
-                      {member.name.split(' ').map(n => n[0]).join('')}
-                    </span>
+                  <div className="w-32 h-32 mx-auto mb-6 rounded-full bg-gradient-to-br from-secondary to-muted flex items-center justify-center overflow-hidden">
+                    {member.image ? (
+                      <img 
+                        src={member.image} 
+                        alt={member.name} 
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <span className="text-3xl font-display font-bold text-muted-foreground">
+                        {member.name.split(' ').map(n => n[0]).join('')}
+                      </span>
+                    )}
                   </div>
                   <h3 className="text-lg font-semibold mb-1">{member.name}</h3>
                   <p className="text-muted-foreground text-sm">{member.role}</p>
