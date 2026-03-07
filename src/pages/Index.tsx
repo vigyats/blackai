@@ -6,6 +6,7 @@ import { FloatingShapes } from '@/components/shared/FloatingShapes';
 import { AnimatedSection } from '@/components/shared/AnimatedSection';
 import { AnimatedCounter } from '@/components/shared/AnimatedCounter';
 import { SparkleIcon } from '@/components/shared/SparkleIcon';
+import { AIGlobe } from '@/components/shared/AIGlobe';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 
@@ -44,6 +45,7 @@ const Index = () => {
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
         <FloatingShapes variant="hero" />
+        <AIGlobe />
         
         {/* Grid pattern */}
         <div 
