@@ -214,11 +214,11 @@ const About = () => {
                   className="text-center"
                 >
                   {member.image ? (
-                    <div className="w-32 h-32 mx-auto mb-6 flex items-center justify-center">
+                    <div className="w-32 h-32 mx-auto mb-6 flex items-center justify-center overflow-hidden">
                       <img 
                         src={member.image} 
                         alt={member.name} 
-                        className="w-full h-full object-contain"
+                        className="w-full h-full object-cover"
                       />
                     </div>
                   ) : (
