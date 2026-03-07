@@ -45,11 +45,11 @@ const timeline = [
 ];
 
 const team = [
-  { name: 'Vigyat', role: 'CEO & Co-founder', image: '/vigyat.png' },
-  { name: 'Vaishnavi Bais', role: 'CMO & Co-founder', image: null },
-  { name: 'Shreyash', role: 'CFO & Co-founder', image: null },
-  { name: 'Tanaya', role: 'COO & Co-founder', image: null },
-  { name: 'Suraj', role: 'CTO & Co-founder', image: null },
+  { name: 'Vigyat Singh', role: 'CEO & Co-founder', image: '/vigyat.png', linkedin: 'https://www.linkedin.com/in/vigyat-singh/' },
+  { name: 'Vaishnavi Bais', role: 'CMO & Co-founder', image: null, linkedin: null },
+  { name: 'Shreyash Dhengekar', role: 'CFO & Co-founder', image: '/shreyash.png', linkedin: 'https://www.linkedin.com/in/shreyash-dhengekar' },
+  { name: 'Tanaya', role: 'COO & Co-founder', image: null, linkedin: null },
+  { name: 'Suraj', role: 'CTO & Co-founder', image: null, linkedin: null },
 ];
 
 const About = () => {
@@ -229,7 +229,17 @@ const About = () => {
                     </div>
                   )}
                   <h3 className="text-lg font-semibold mb-1">{member.name}</h3>
-                  <p className="text-muted-foreground text-sm">{member.role}</p>
+                  <p className="text-muted-foreground text-sm mb-4">{member.role}</p>
+                  {member.linkedin && (
+                    <a
+                      href={member.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-block px-4 py-2 text-xs font-medium text-foreground bg-accent/10 hover:bg-accent/20 border border-accent/30 rounded-lg transition-all"
+                    >
+                      Connect with me
+                    </a>
+                  )}
                 </motion.div>
               </AnimatedSection>
             ))}
