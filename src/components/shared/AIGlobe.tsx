@@ -26,7 +26,7 @@ export const AIGlobe = () => {
     const centerY = canvas.offsetHeight / 2;
     const radius = Math.min(centerX, centerY) * 0.85;
     let rotation = 0;
-    let isRotating = false;
+    let isRotating = true;
     let glowIntensity = 0;
 
     // Meteor class
@@ -37,14 +37,37 @@ export const AIGlobe = () => {
       size: number;
       angle: number;
       active: boolean;
+      fromSide: number;
 
       constructor() {
-        this.angle = Math.random() * Math.PI / 3 - Math.PI / 6;
-        this.x = -100;
-        this.y = centerY + (Math.random() - 0.5) * radius;
+        this.fromSide = Math.floor(Math.random() * 4); // 0=left, 1=top, 2=right, 3=bottom
         this.speed = 8 + Math.random() * 4;
         this.size = 3 + Math.random() * 2;
         this.active = true;
+
+        // Set starting position and angle based on side
+        switch(this.fromSide) {
+          case 0: // from left
+            this.x = -100;
+            this.y = centerY + (Math.random() - 0.5) * radius;
+            this.angle = Math.random() * Math.PI / 3 - Math.PI / 6;
+            break;
+          case 1: // from top
+            this.x = centerX + (Math.random() - 0.5) * radius;
+            this.y = -100;
+            this.angle = Math.PI / 2 + (Math.random() - 0.5) * Math.PI / 3;
+            break;
+          case 2: // from right
+            this.x = canvas.offsetWidth + 100;
+            this.y = centerY + (Math.random() - 0.5) * radius;
+            this.angle = Math.PI + (Math.random() - 0.5) * Math.PI / 3;
+            break;
+          case 3: // from bottom
+            this.x = centerX + (Math.random() - 0.5) * radius;
+            this.y = canvas.offsetHeight + 100;
+            this.angle = -Math.PI / 2 + (Math.random() - 0.5) * Math.PI / 3;
+            break;
+        }
       }
 
       update() {
@@ -58,14 +81,12 @@ export const AIGlobe = () => {
 
         if (distance <= radius + 10) {
           this.active = false;
-          if (!impacted) {
-            setImpacted(true);
-            isRotating = true;
-            glowIntensity = 1;
-          }
+          glowIntensity = 1;
         }
 
-        if (this.x > canvas.offsetWidth + 100) {
+        // Remove if out of bounds
+        if (this.x < -200 || this.x > canvas.offsetWidth + 200 || 
+            this.y < -200 || this.y > canvas.offsetHeight + 200) {
           this.active = false;
         }
       }
@@ -206,13 +227,18 @@ export const AIGlobe = () => {
       });
     });
 
-    // Create meteors
+    // Create initial meteors
     const meteors: Meteor[] = [];
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 3; i++) {
       setTimeout(() => {
         meteors.push(new Meteor());
       }, i * 200);
     }
+
+    // Add new meteor every 5-6 seconds
+    const meteorInterval = setInterval(() => {
+      meteors.push(new Meteor());
+    }, 5000 + Math.random() * 1000);
 
     // Animation loop
     const animate = () => {
@@ -273,13 +299,15 @@ export const AIGlobe = () => {
         ctx.stroke();
       }
 
-      // Update and draw meteors
-      meteors.forEach((meteor, index) => {
-        if (meteor.active) {
-          meteor.update();
-          meteor.draw(ctx);
+      // Update and draw meteors (remove inactive ones)
+      for (let i = meteors.length - 1; i >= 0; i--) {
+        if (meteors[i].active) {
+          meteors[i].update();
+          meteors[i].draw(ctx);
+        } else if (!meteors[i].active && i < meteors.length - 5) {
+          meteors.splice(i, 1);
         }
-      });
+      }
 
       // Update and draw particles
       particles.forEach(p => p.update(rotation));
@@ -303,6 +331,7 @@ export const AIGlobe = () => {
 
     return () => {
       window.removeEventListener('resize', updateSize);
+      clearInterval(meteorInterval);
     };
   }, [impacted]);
 
