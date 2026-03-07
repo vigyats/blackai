@@ -244,21 +244,12 @@ export const AIGlobe = () => {
     const animate = () => {
       ctx.clearRect(0, 0, canvas.offsetWidth, canvas.offsetHeight);
 
-      // Draw globe outline with glow
+      // Draw globe outline
       ctx.beginPath();
       ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
-      ctx.strokeStyle = `rgba(255, 204, 0, ${0.15 + glowIntensity * 0.3})`;
+      ctx.strokeStyle = 'rgba(255, 204, 0, 0.15)';
       ctx.lineWidth = 2;
       ctx.stroke();
-
-      // Outer glow during impact
-      if (glowIntensity > 0) {
-        ctx.beginPath();
-        ctx.arc(centerX, centerY, radius + 10, 0, Math.PI * 2);
-        ctx.strokeStyle = `rgba(255, 204, 0, ${glowIntensity * 0.3})`;
-        ctx.lineWidth = 20;
-        ctx.stroke();
-      }
 
       // Draw latitude lines
       for (let i = -2; i <= 2; i++) {
@@ -268,7 +259,7 @@ export const AIGlobe = () => {
 
         ctx.beginPath();
         ctx.ellipse(centerX, y, r, r * 0.3, 0, 0, Math.PI * 2);
-        ctx.strokeStyle = `rgba(255, 204, 0, ${0.08 + glowIntensity * 0.1})`;
+        ctx.strokeStyle = 'rgba(255, 204, 0, 0.08)';
         ctx.lineWidth = 1;
         ctx.stroke();
       }
@@ -294,7 +285,7 @@ export const AIGlobe = () => {
             }
           }
         }
-        ctx.strokeStyle = `rgba(255, 204, 0, ${0.08 + glowIntensity * 0.1})`;
+        ctx.strokeStyle = 'rgba(255, 204, 0, 0.08)';
         ctx.lineWidth = 1;
         ctx.stroke();
       }
