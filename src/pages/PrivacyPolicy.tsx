@@ -1,5 +1,7 @@
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useLocation } from 'react-router-dom';
 import { Search, Shield, Lock, Eye, Database, UserCheck, FileText, AlertCircle, Mail, ChevronDown } from 'lucide-react';
 import { Layout } from '@/components/layout/Layout';
 import { AnimatedSection } from '@/components/shared/AnimatedSection';
@@ -164,6 +166,15 @@ const sections = [
 const PrivacyPolicy = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [expandedSections, setExpandedSections] = useState<string[]>([]);
+  const [showBorder, setShowBorder] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    setShowBorder(true);
+    const timer = setTimeout(() => setShowBorder(false), 1000);
+    return () => clearTimeout(timer);
+  }, [location]);
 
   const toggleSection = (sectionId: string) => {
     setExpandedSections(prev =>
@@ -194,6 +205,30 @@ const PrivacyPolicy = () => {
 
   return (
     <Layout>
+      {/* Golden Border Animation */}
+      <AnimatePresence>
+        {showBorder && (
+          <>
+            <motion.div
+              initial={{ scaleX: 0 }}
+              animate={{ scaleX: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5 }}
+              className="fixed top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-accent to-transparent z-50"
+              style={{ transformOrigin: 'center' }}
+            />
+            <motion.div
+              initial={{ scaleX: 0 }}
+              animate={{ scaleX: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5 }}
+              className="fixed bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-accent to-transparent z-50"
+              style={{ transformOrigin: 'center' }}
+            />
+          </>
+        )}
+      </AnimatePresence>
+
       {/* Hero Section */}
       <section className="relative pt-32 pb-16 overflow-hidden border-b border-border/30">
         <div className="container mx-auto px-6 relative z-10">
