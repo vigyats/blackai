@@ -34,7 +34,15 @@ const contactInfo = [
 
 const socialLinks = [
   { icon: Linkedin, label: 'LinkedIn', href: 'https://www.linkedin.com/company/blackaii/' },
-  { icon: X, label: 'X', href: 'https://x.com/blackai_in' },
+  { 
+    icon: () => (
+      <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
+        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+      </svg>
+    ),
+    label: 'X', 
+    href: 'https://x.com/blackai_in' 
+  },
   { icon: Instagram, label: 'Instagram', href: 'https://www.instagram.com/blackai_in?igsh=MXUzY3oxa3Bmb2Z5cQ==' },
 ];
 
@@ -275,28 +283,35 @@ const Contact = () => {
                         whileHover={{ scale: 1.1, y: -2 }}
                         className="w-12 h-12 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-foreground/50 transition-colors"
                       >
-                        <social.icon size={20} />
+                        {typeof social.icon === 'function' ? <social.icon /> : <social.icon size={20} />}
                       </motion.a>
                     ))}
                   </div>
                 </div>
 
-                {/* Map placeholder */}
-                <div className="relative rounded-2xl overflow-hidden h-64 bg-card border border-border/50">
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-center">
-                      <MapPin className="w-8 h-8 mx-auto mb-2 text-muted-foreground" />
-                      <p className="text-muted-foreground">Nagpur, Maharashtra, India</p>
-                    </div>
+                {/* Location Display */}
+                <div className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-card to-secondary/30 border border-border/50 p-12">
+                  <div className="text-center">
+                    <motion.div
+                      animate={{ 
+                        scale: [1, 1.05, 1],
+                      }}
+                      transition={{ 
+                        duration: 3,
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                      }}
+                      className="w-24 h-24 mx-auto mb-6 rounded-full bg-accent/10 flex items-center justify-center"
+                    >
+                      <MapPin className="w-12 h-12 text-accent" />
+                    </motion.div>
+                    <h3 className="text-xl font-display font-semibold mb-2">Our Location</h3>
+                    <p className="text-muted-foreground text-lg">Nagpur, Maharashtra</p>
+                    <p className="text-muted-foreground">India</p>
                   </div>
-                  {/* Grid pattern overlay */}
-                  <div 
-                    className="absolute inset-0 opacity-[0.03]"
-                    style={{
-                      backgroundImage: 'linear-gradient(hsl(0, 0%, 50%) 1px, transparent 1px), linear-gradient(90deg, hsl(0, 0%, 50%) 1px, transparent 1px)',
-                      backgroundSize: '20px 20px',
-                    }}
-                  />
+                  {/* Decorative circles */}
+                  <div className="absolute top-4 right-4 w-32 h-32 rounded-full bg-accent/5 blur-2xl" />
+                  <div className="absolute bottom-4 left-4 w-32 h-32 rounded-full bg-purple-glow/5 blur-2xl" />
                 </div>
               </div>
             </AnimatedSection>

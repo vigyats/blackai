@@ -50,7 +50,7 @@ export const Footer = () => {
               </div>
             </Link>
             <p className="text-muted-foreground text-sm leading-relaxed mb-6">
-              Pioneering the future of intelligent automation through agentic AI solutions.
+              Technology evolves every second. Join us in shaping the future of intelligent automation and stay ahead of the curve.
             </p>
             <div className="flex gap-4">
               {footerLinks.social.map((social) => (
