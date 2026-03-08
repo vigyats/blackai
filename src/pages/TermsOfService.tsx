@@ -77,7 +77,7 @@ const sections = [
     content: [
       {
         subtitle: 'Service Fees',
-        text: 'Fees for our services are specified in your service agreement or quote. All fees are in Indian Rupees (INR) unless otherwise stated. Prices are subject to change with 30 days\' notice for existing customers.'
+        text: 'Fees for our services are specified in your service agreement or quote as agreed. All fees are in Indian Rupees (INR) unless otherwise stated. Prices are subject to change with 30 days\' notice for existing customers.'
       },
       {
         subtitle: 'Payment Methods',
@@ -85,7 +85,7 @@ const sections = [
       },
       {
         subtitle: 'Advance Payments',
-        text: 'For custom AI development projects, we require advance payment as specified in the project agreement. Advance payments are typically structured as: 40% upon project initiation, 30% upon prototype delivery, and 30% upon final delivery.'
+        text: 'For custom AI development projects, we require advance payment as specified in the project agreement. Advance payments are typically structured as: 40% upon project initiation, 30% upon prototype delivery, and 30% upon final delivery as agreed.'
       },
       {
         subtitle: 'Late Payments',
@@ -438,11 +438,13 @@ const TermsOfService = () => {
                 return (
                   <AnimatedSection key={section.id} delay={index * 0.1}>
                     <Card 
-                      className="bg-card/50 border-border/50 hover:border-border transition-all cursor-pointer"
-                      onClick={() => toggleSection(section.id)}
+                      className="bg-card/50 border-border/50 hover:border-border transition-all"
                     >
                       <div className="p-8">
-                        <div className="flex items-start gap-4">
+                        <div 
+                          className="flex items-start gap-4 cursor-pointer"
+                          onClick={() => toggleSection(section.id)}
+                        >
                           <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center flex-shrink-0">
                             <section.icon className="w-6 h-6 text-accent" />
                           </div>

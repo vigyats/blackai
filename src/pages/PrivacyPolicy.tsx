@@ -292,11 +292,13 @@ const PrivacyPolicy = () => {
                 return (
                   <AnimatedSection key={section.id} delay={index * 0.1}>
                     <Card 
-                      className="bg-card/50 border-border/50 hover:border-border transition-all cursor-pointer"
-                      onClick={() => toggleSection(section.id)}
+                      className="bg-card/50 border-border/50 hover:border-border transition-all"
                     >
                       <div className="p-8">
-                        <div className="flex items-start gap-4">
+                        <div 
+                          className="flex items-start gap-4 cursor-pointer"
+                          onClick={() => toggleSection(section.id)}
+                        >
                           <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center flex-shrink-0">
                             <section.icon className="w-6 h-6 text-accent" />
                           </div>

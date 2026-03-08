@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowUpRight, Linkedin, Instagram, X } from 'lucide-react';
+import AnimatedLogo from '@/components/shared/AnimatedLogo';
 
 const footerLinks = {
   navigation: [
@@ -33,9 +34,12 @@ export const Footer = () => {
           {/* Brand */}
           <div className="lg:col-span-1">
             <Link to="/" className="inline-block mb-4">
-              <span className="text-2xl font-display font-bold text-foreground">
-                Black<span className="text-gradient-gold">AI</span>
-              </span>
+              <div className="flex items-center gap-2">
+                <AnimatedLogo />
+                <span className="text-2xl font-display font-bold text-foreground">
+                  Black<span className="text-gradient-gold">AI</span>
+                </span>
+              </div>
             </Link>
             <p className="text-muted-foreground text-sm leading-relaxed mb-6">
               Pioneering the future of intelligent automation through agentic AI solutions.

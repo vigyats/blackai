@@ -337,10 +337,11 @@ export const AIGlobe = () => {
         ref={canvasRef}
         className="w-full h-full"
         style={{
-          filter: 'drop-shadow(0 0 60px rgba(255, 204, 0, 0.4))',
+          filter: 'drop-shadow(0 0 80px rgba(255, 204, 0, 0.5)) drop-shadow(0 0 40px rgba(255, 204, 0, 0.3))',
         }}
       />
-      <div className="absolute inset-0 bg-gradient-radial from-accent/10 via-transparent to-transparent blur-3xl" />
+      <div className="absolute inset-0 bg-gradient-radial from-accent/20 via-accent/5 to-transparent blur-3xl animate-pulse-glow" />
+      <div className="absolute inset-0 bg-gradient-radial from-purple-glow/10 via-transparent to-transparent blur-2xl" />
     </motion.div>
   );
 };
