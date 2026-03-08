@@ -18,7 +18,15 @@ const footerLinks = {
   ],
   social: [
     { name: 'LinkedIn', icon: Linkedin, href: 'https://www.linkedin.com/company/blackaii/' },
-    { name: 'X', icon: X, href: 'https://x.com/blackai_in' },
+    { 
+      name: 'X', 
+      icon: () => (
+        <svg viewBox="0 0 24 24" fill="currentColor" className="w-[18px] h-[18px]">
+          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+        </svg>
+      ),
+      href: 'https://x.com/blackai_in' 
+    },
     { name: 'Instagram', icon: Instagram, href: 'https://www.instagram.com/blackai_in?igsh=MXUzY3oxa3Bmb2Z5cQ==' },
   ],
 };
@@ -52,7 +60,7 @@ export const Footer = () => {
                   whileHover={{ scale: 1.1, y: -2 }}
                   className="w-10 h-10 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-foreground/50 transition-colors"
                 >
-                  <social.icon size={18} />
+                  {typeof social.icon === 'function' ? <social.icon /> : <social.icon size={18} />}
                 </motion.a>
               ))}
             </div>

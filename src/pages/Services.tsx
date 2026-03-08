@@ -223,7 +223,7 @@ const Services = () => {
             {processSteps.map((step, index) => (
               <AnimatedSection key={step.step} delay={index * 0.1}>
                 <div className="relative">
-                  <div className="text-6xl font-display font-bold text-secondary/50 mb-4">
+                  <div className="text-6xl font-display font-bold text-foreground/20 mb-4">
                     {step.step}
                   </div>
                   <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
