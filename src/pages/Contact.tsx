@@ -192,66 +192,64 @@ ${formData.message}
                   </motion.div>
                 ) : (
                   <form onSubmit={handleSubmit} className="space-y-6">
-                    <div className="grid sm:grid-cols-2 gap-4">
-                      <div>
-                        <label htmlFor="name" className="block text-sm font-medium mb-2">
-                          Name *
-                        </label>
-                        <Input
-                          id="name"
-                          name="name"
-                          value={formData.name}
-                          onChange={handleInputChange}
-                          required
-                          placeholder="Your name"
-                          className="bg-background/50 border-border/50 focus:border-accent"
-                        />
-                      </div>
-                      <div>
-                        <label htmlFor="email" className="block text-sm font-medium mb-2">
-                          Email *
-                        </label>
-                        <Input
-                          id="email"
-                          name="email"
-                          type="email"
-                          value={formData.email}
-                          onChange={handleInputChange}
-                          required
-                          placeholder="your@email.com"
-                          className="bg-background/50 border-border/50 focus:border-accent"
-                        />
-                      </div>
+                    <div>
+                      <label htmlFor="name" className="block text-sm font-medium mb-2">
+                        Name *
+                      </label>
+                      <Input
+                        id="name"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleInputChange}
+                        required
+                        placeholder="Your name"
+                        className="bg-background/50 border-border/50 focus:border-accent"
+                      />
                     </div>
 
-                    <div className="grid sm:grid-cols-2 gap-4">
-                      <div>
-                        <label htmlFor="phone" className="block text-sm font-medium mb-2">
-                          Phone <span className="text-muted-foreground">(optional)</span>
-                        </label>
-                        <Input
-                          id="phone"
-                          name="phone"
-                          type="tel"
-                          value={formData.phone}
-                          onChange={handleInputChange}
-                          placeholder="+91 XXXXX XXXXX"
-                          className="bg-background/50 border-border/50 focus:border-accent"
-                        />
-                      </div>
-                      <div>
-                        <label htmlFor="company" className="block text-sm font-medium mb-2">
-                          Company <span className="text-muted-foreground">(optional)</span>
-                        </label>
-                        <Input
-                          id="company"
-                          name="company"
-                          value={formData.company}
-                          onChange={handleInputChange}
-                          placeholder="Your company"
-                          className="bg-background/50 border-border/50 focus:border-accent"
-                        />
-                      </div>
+                    <div>
+                      <label htmlFor="email" className="block text-sm font-medium mb-2">
+                        Email *
+                      </label>
+                      <Input
+                        id="email"
+                        name="email"
+                        type="email"
+                        value={formData.email}
+                        onChange={handleInputChange}
+                        required
+                        placeholder="your@email.com"
+                        className="bg-background/50 border-border/50 focus:border-accent"
+                      />
+                    </div>
+
+                    <div>
+                      <label htmlFor="phone" className="block text-sm font-medium mb-2">
+                        Phone <span className="text-muted-foreground">(optional)</span>
+                      </label>
+                      <Input
+                        id="phone"
+                        name="phone"
+                        type="tel"
+                        value={formData.phone}
+                        onChange={handleInputChange}
+                        placeholder="+91 XXXXX XXXXX"
+                        className="bg-background/50 border-border/50 focus:border-accent"
+                      />
+                    </div>
+
+                    <div>
+                      <label htmlFor="company" className="block text-sm font-medium mb-2">
+                        Company <span className="text-muted-foreground">(optional)</span>
+                      </label>
+                      <Input
+                        id="company"
+                        name="company"
+                        value={formData.company}
+                        onChange={handleInputChange}
+                        placeholder="Your company"
+                        className="bg-background/50 border-border/50 focus:border-accent"
+                      />
                     </div>
 
                     <div className="grid sm:grid-cols-2 gap-4">
