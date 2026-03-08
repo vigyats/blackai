@@ -53,7 +53,10 @@ const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    phone: '',
     company: '',
+    service: '',
+    inquiryType: '',
     message: '',
   });
 
@@ -68,20 +71,31 @@ const Contact = () => {
 
     try {
       // Using Web3Forms API to send email
+      const formPayload = {
+        access_key: '0a0db9a2-ed31-4c8a-9ad8-d95a1a86c32a',
+        subject: 'BlackAI - New Contact Form Submission',
+        name: formData.name,
+        email: formData.email,
+        message: `
+Name: ${formData.name}
+Email: ${formData.email}
+Phone: ${formData.phone || 'Not provided'}
+Company: ${formData.company || 'Not provided'}
+Service Interested: ${formData.service || 'Not specified'}
+Inquiry Type: ${formData.inquiryType || 'Not specified'}
+
+Message:
+${formData.message}
+        `,
+      };
+
       const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Accept': 'application/json',
         },
-        body: JSON.stringify({
-          access_key: '0a0db9a2-ed31-4c8a-9ad8-d95a1a86c32a',
-          subject: 'BlackAI - New Contact Form Submission',
-          from_name: formData.name,
-          email: formData.email,
-          company: formData.company || 'Not provided',
-          message: formData.message,
-          to: 'info@blackai.in,vigyatsingh33@gmail.com',
-        }),
+        body: JSON.stringify(formPayload),
       });
 
       const result = await response.json();
@@ -95,7 +109,7 @@ const Contact = () => {
 
         // Reset form after a delay
         setTimeout(() => {
-          setFormData({ name: '', email: '', company: '', message: '' });
+          setFormData({ name: '', email: '', phone: '', company: '', service: '', inquiryType: '', message: '' });
           setIsSubmitted(false);
         }, 3000);
       } else {
@@ -181,7 +195,7 @@ const Contact = () => {
                     <div className="grid sm:grid-cols-2 gap-4">
                       <div>
                         <label htmlFor="name" className="block text-sm font-medium mb-2">
-                          Name
+                          Name *
                         </label>
                         <Input
                           id="name"
@@ -195,7 +209,7 @@ const Contact = () => {
                       </div>
                       <div>
                         <label htmlFor="email" className="block text-sm font-medium mb-2">
-                          Email
+                          Email *
                         </label>
                         <Input
                           id="email"
@@ -210,18 +224,81 @@ const Contact = () => {
                       </div>
                     </div>
 
-                    <div>
-                      <label htmlFor="company" className="block text-sm font-medium mb-2">
-                        Company <span className="text-muted-foreground">(optional)</span>
-                      </label>
-                      <Input
-                        id="company"
-                        name="company"
-                        value={formData.company}
-                        onChange={handleInputChange}
-                        placeholder="Your company"
-                        className="bg-background/50 border-border/50 focus:border-accent"
-                      />
+                    <div className="grid sm:grid-cols-2 gap-4">
+                      <div>
+                        <label htmlFor="phone" className="block text-sm font-medium mb-2">
+                          Phone <span className="text-muted-foreground">(optional)</span>
+                        </label>
+                        <Input
+                          id="phone"
+                          name="phone"
+                          type="tel"
+                          value={formData.phone}
+                          onChange={handleInputChange}
+                          placeholder="+91 XXXXX XXXXX"
+                          className="bg-background/50 border-border/50 focus:border-accent"
+                        />
+                      </div>
+                      <div>
+                        <label htmlFor="company" className="block text-sm font-medium mb-2">
+                          Company <span className="text-muted-foreground">(optional)</span>
+                        </label>
+                        <Input
+                          id="company"
+                          name="company"
+                          value={formData.company}
+                          onChange={handleInputChange}
+                          placeholder="Your company"
+                          className="bg-background/50 border-border/50 focus:border-accent"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid sm:grid-cols-2 gap-4">
+                      <div>
+                        <label htmlFor="service" className="block text-sm font-medium mb-2">
+                          Service Interested <span className="text-muted-foreground">(optional)</span>
+                        </label>
+                        <select
+                          id="service"
+                          name="service"
+                          value={formData.service}
+                          onChange={handleInputChange as any}
+                          className="w-full h-10 px-3 rounded-md bg-background/50 border border-border/50 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent text-sm"
+                        >
+                          <option value="">Select a service</option>
+                          <option value="Custom AI Agents">Custom AI Agents</option>
+                          <option value="Workflow Automation">Workflow Automation</option>
+                          <option value="AI Consultation">AI Consultation</option>
+                          <option value="Website Development">Website Development</option>
+                          <option value="AI Deployment & Integration">AI Deployment & Integration</option>
+                          <option value="AI Website Integration">AI Website Integration</option>
+                          <option value="AI SEO Boost">AI SEO Boost</option>
+                          <option value="AI Chatbot Development">AI Chatbot Development</option>
+                          <option value="AI Content Generation">AI Content Generation</option>
+                          <option value="Custom Web Applications">Custom Web Applications</option>
+                          <option value="Other">Other</option>
+                        </select>
+                      </div>
+                      <div>
+                        <label htmlFor="inquiryType" className="block text-sm font-medium mb-2">
+                          Inquiry Type <span className="text-muted-foreground">(optional)</span>
+                        </label>
+                        <select
+                          id="inquiryType"
+                          name="inquiryType"
+                          value={formData.inquiryType}
+                          onChange={handleInputChange as any}
+                          className="w-full h-10 px-3 rounded-md bg-background/50 border border-border/50 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent text-sm"
+                        >
+                          <option value="">Select inquiry type</option>
+                          <option value="Product/Service Inquiry">Product/Service Inquiry</option>
+                          <option value="Collaboration Opportunity">Collaboration Opportunity</option>
+                          <option value="Join Our Team">Join Our Team</option>
+                          <option value="Partnership">Partnership</option>
+                          <option value="General Inquiry">General Inquiry</option>
+                        </select>
+                      </div>
                     </div>
 
                     <div>
