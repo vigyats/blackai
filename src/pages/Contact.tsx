@@ -66,21 +66,50 @@ const Contact = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    try {
+      // Using Web3Forms API to send email
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          access_key: '0a0db9a2-ed31-4c8a-9ad8-d95a1a86c32a',
+          subject: 'BlackAI - New Contact Form Submission',
+          from_name: formData.name,
+          email: formData.email,
+          company: formData.company || 'Not provided',
+          message: formData.message,
+          to: 'info@blackai.in,vigyatsingh33@gmail.com',
+        }),
+      });
 
-    setIsSubmitting(false);
-    setIsSubmitted(true);
-    toast({
-      title: 'Message sent!',
-      description: "We'll get back to you as soon as possible.",
-    });
+      const result = await response.json();
 
-    // Reset form after a delay
-    setTimeout(() => {
-      setFormData({ name: '', email: '', company: '', message: '' });
-      setIsSubmitted(false);
-    }, 3000);
+      if (result.success) {
+        setIsSubmitted(true);
+        toast({
+          title: 'Message sent!',
+          description: "We'll get back to you as soon as possible.",
+        });
+
+        // Reset form after a delay
+        setTimeout(() => {
+          setFormData({ name: '', email: '', company: '', message: '' });
+          setIsSubmitted(false);
+        }, 3000);
+      } else {
+        throw new Error('Failed to send message');
+      }
+    } catch (error) {
+      toast({
+        title: 'Error',
+        description: 'Failed to send message. Please try again or email us directly.',
+        variant: 'destructive',
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
