@@ -46,7 +46,7 @@ const timeline = [
 
 const team = [
   { name: 'Vigyat Singh', role: 'CEO & Co-founder', image: '/vigyat.png', linkedin: 'https://www.linkedin.com/in/vigyat-singh/' },
-  { name: 'Vaishnavi Bais', role: 'CMO & Co-founder', image: null, linkedin: 'https://www.linkedin.com/in/vaishnavibais20/' },
+  { name: 'Vaishnavi Bais', role: 'CMO & Co-founder', image: '/vaishnavi.png', linkedin: 'https://www.linkedin.com/in/vaishnavibais20/' },
   { name: 'Shreyash Dhengekar', role: 'CFO, Advisor & Co-founder', image: '/shreyash.png', linkedin: 'https://www.linkedin.com/in/shreyash-dhengekar' },
   { name: 'Tanaya Sur', role: 'CRO, BDM & Co-founder', image: '/tanaya.png', linkedin: 'https://www.linkedin.com/in/tanaya-pillewan-38370a256/' },
   { name: 'Suraj', role: 'CTO & Co-founder', image: '/suraj.png', linkedin: 'https://www.linkedin.com/in/suraj-dudhe-70b16b209/' },
