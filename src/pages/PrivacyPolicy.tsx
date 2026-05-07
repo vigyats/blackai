@@ -212,7 +212,7 @@ const PrivacyPolicy = () => {
     doc.text('PRIVACY POLICY', pageW / 2, y, { align: 'center' }); y += 8;
     doc.setFontSize(9); doc.setFont('helvetica', 'normal');
     doc.setTextColor(100, 100, 100);
-    doc.text('Effective Date: July 14, 2025  |  Nagpur, Maharashtra, India', pageW / 2, y, { align: 'center' }); y += 10;
+    doc.text('Effective Date: April 01, 2026  |  Nagpur, Maharashtra, India', pageW / 2, y, { align: 'center' }); y += 10;
     doc.setDrawColor(180, 180, 180); doc.setLineWidth(0.3);
     doc.line(margin, y, pageW - margin, y); y += 8;
 
@@ -252,7 +252,7 @@ const PrivacyPolicy = () => {
     doc.line(margin, y, pageW - margin, y); y += 6;
     doc.setFontSize(8); doc.setFont('helvetica', 'normal');
     doc.setTextColor(100, 100, 100);
-    doc.text('This document is legally binding. For queries contact: privacy@blackai.in', pageW / 2, y, { align: 'center' }); y += 5;
+    doc.text('This document is legally binding. For queries contact: info@blackai.in', pageW / 2, y, { align: 'center' }); y += 5;
     doc.text('\u00a9 ' + new Date().getFullYear() + ' BlackAI. All rights reserved. | blackai.in', pageW / 2, y, { align: 'center' });
 
     const totalPages = doc.getNumberOfPages();
@@ -310,7 +310,7 @@ const PrivacyPolicy = () => {
               transition={{ duration: 0.8, delay: 0.4 }}
               className="text-muted-foreground mb-8"
             >
-              Last Updated: {new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+              Last Updated: April 01, 2026
             </motion.p>
 
             {/* Search Bar */}
@@ -442,7 +442,7 @@ const PrivacyPolicy = () => {
               please contact us at:
             </p>
             <div className="space-y-2 text-muted-foreground">
-              <p><strong className="text-foreground">Email:</strong> privacy@blackai.in</p>
+              <p><strong className="text-foreground">Email:</strong> info@blackai.in</p>
               <p><strong className="text-foreground">Address:</strong> BlackAI, Nagpur, Maharashtra, India</p>
               <p><strong className="text-foreground">Phone:</strong> +91 9975473730</p>
             </div>

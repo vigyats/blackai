@@ -292,7 +292,7 @@ const sections = [
       },
       {
         subtitle: 'Notices',
-        text: 'All notices under these terms must be in writing and sent to the addresses specified in your service agreement or to legal@blackai.in for BlackAI.'
+        text: 'All notices under these terms must be in writing and sent to the addresses specified in your service agreement or to info@blackai.in for BlackAI.'
       }
     ]
   }
@@ -374,7 +374,7 @@ const TermsOfService = () => {
     doc.setFontSize(9);
     doc.setFont('helvetica', 'normal');
     doc.setTextColor(100, 100, 100);
-    doc.text('Effective Date: July 14, 2025  |  Nagpur, Maharashtra, India', pageW / 2, y, { align: 'center' });
+    doc.text('Effective Date: April 01, 2026  |  Nagpur, Maharashtra, India', pageW / 2, y, { align: 'center' });
     y += 10;
 
     // Divider
@@ -452,7 +452,7 @@ const TermsOfService = () => {
     doc.setFontSize(8);
     doc.setFont('helvetica', 'normal');
     doc.setTextColor(100, 100, 100);
-    doc.text('This document is legally binding. For queries contact: legal@blackai.in', pageW / 2, y, { align: 'center' });
+    doc.text('This document is legally binding. For queries contact: info@blackai.in', pageW / 2, y, { align: 'center' });
     y += 5;
     doc.text('\u00a9 ' + new Date().getFullYear() + ' BlackAI. All rights reserved. | blackai.in', pageW / 2, y, { align: 'center' });
 
@@ -529,7 +529,7 @@ const TermsOfService = () => {
               transition={{ duration: 0.8, delay: 0.4 }}
               className="text-muted-foreground mb-8"
             >
-              Last Updated: {new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+              Last Updated: April 01, 2026
             </motion.p>
 
             {/* Search Bar */}
@@ -685,7 +685,7 @@ const TermsOfService = () => {
               If you have any questions or concerns about these Terms of Service, please contact our legal team:
             </p>
             <div className="space-y-2 text-muted-foreground">
-              <p><strong className="text-foreground">Email:</strong> legal@blackai.in</p>
+              <p><strong className="text-foreground">Email:</strong> info@blackai.in</p>
               <p><strong className="text-foreground">Address:</strong> BlackAI, Nagpur, Maharashtra, India</p>
               <p><strong className="text-foreground">Phone:</strong> +91 9975473730</p>
             </div>

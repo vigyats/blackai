@@ -102,9 +102,11 @@ const SearchableDropdown = ({ label, placeholder, options, value, onChange }: Se
 
   return (
     <div ref={ref} className="relative">
-      <label className="block text-sm font-medium mb-2">
-        {label} <span className="text-muted-foreground">(optional)</span>
-      </label>
+      {label && (
+        <label className="block text-sm font-medium mb-2">
+          {label} <span className="text-muted-foreground">(optional)</span>
+        </label>
+      )}
       <div
         className={`flex items-center h-10 px-3 rounded-md bg-background/50 border ${
           open ? 'border-accent ring-1 ring-accent' : 'border-border/50'
@@ -405,16 +407,16 @@ ${formData.message}
                         Phone <span className="text-muted-foreground">(optional)</span>
                       </label>
                       <div className="flex gap-2">
-                        <select
-                          name="countryCode"
-                          value={formData.countryCode}
-                          onChange={handleInputChange as any}
-                          className="w-28 h-10 px-2 rounded-md bg-background/50 border border-border/50 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent text-sm flex-shrink-0"
-                        >
-                          {countryCodes.map(c => (
-                            <option key={c.code} value={c.code}>{c.label}</option>
-                          ))}
-                        </select>
+                        <SearchableDropdown
+                          label=""
+                          placeholder="🇮🇳 +91"
+                          options={countryCodes.map(c => c.label)}
+                          value={countryCodes.find(c => c.code === formData.countryCode)?.label || '🇮🇳 +91'}
+                          onChange={(val) => {
+                            const found = countryCodes.find(c => c.label === val);
+                            if (found) setFormData(prev => ({ ...prev, countryCode: found.code }));
+                          }}
+                        />
                         <Input
                           id="phone"
                           name="phone"
