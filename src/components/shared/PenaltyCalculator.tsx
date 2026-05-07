@@ -121,7 +121,7 @@ export const PenaltyCalculator = () => {
         )}
 
         <p className="text-xs text-muted-foreground mt-4">
-          Note: This calculator is for estimation purposes only. Actual penalties will be calculated based on the terms in your service agreement.
+          Note: This calculator is for estimation purposes only. Actual penalties will be calculated based on the terms in your service agreement. If no specific agreement was made regarding penalty rates, the amount calculated above shall be considered as the final applicable penalty.
         </p>
       </div>
     </Card>
