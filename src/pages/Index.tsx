@@ -104,7 +104,7 @@ const Index = () => {
                 size="lg"
                 className="bg-foreground text-background hover:bg-foreground/90 px-8 h-12 text-base font-medium group"
               >
-                <Link to="/contact">
+                <Link to="/contact?inquiry=Product%2FService+Inquiry">
                   Get Started
                   <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" size={18} />
                 </Link>
@@ -273,7 +273,7 @@ const Index = () => {
               size="lg"
               className="bg-foreground text-background hover:bg-foreground/90 px-10 h-14 text-base font-medium group"
             >
-              <Link to="/contact">
+              <Link to="/contact?inquiry=Product%2FService+Inquiry">
                 Start a Conversation
                 <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" size={18} />
               </Link>

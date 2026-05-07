@@ -2,11 +2,13 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLocation } from 'react-router-dom';
-import { Search, FileText, Scale, AlertTriangle, CreditCard, Ban, CheckCircle, Users, Shield, Gavel, ChevronDown } from 'lucide-react';
+import { Search, FileText, Scale, AlertTriangle, CreditCard, Ban, CheckCircle, Users, Shield, Gavel, ChevronDown, Calculator, Download } from 'lucide-react';
 import { Layout } from '@/components/layout/Layout';
 import { AnimatedSection } from '@/components/shared/AnimatedSection';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
+import { PenaltyCalculator } from '@/components/shared/PenaltyCalculator';
+import jsPDF from 'jspdf';
 
 const sections = [
   {
@@ -90,6 +92,11 @@ const sections = [
       {
         subtitle: 'Late Payments',
         text: 'Late payments may be subject to interest charges of 1.5% per month (18% per annum) or the maximum rate permitted by law, whichever is lower. We reserve the right to suspend services for accounts with overdue payments.'
+      },
+      {
+        subtitle: 'Delayed Payment — Service Suspension & Penalty',
+        text: 'Delayed payments are subject to service suspension or termination after 15 days of relaxation from the deployment date. An additional 1-day relaxation is granted exclusively for banking-related issues (e.g., bank holidays, technical failures), subject to written notification. After the relaxation period, a daily penalty is applicable as follows: (a) Base payment ≤ ₹1,00,000: 0.77% per day; (b) Base payment > ₹1,00,000 and ≤ ₹25,00,000: 0.50% per day; (c) Base payment > ₹25,00,000: 0.13% per day. The penalty accrues on the outstanding base payment amount for each day of delay beyond the relaxation period.',
+        hasCalculator: true,
       },
       {
         subtitle: 'Taxes',
@@ -295,6 +302,176 @@ const TermsOfService = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [expandedSections, setExpandedSections] = useState<string[]>([]);
 
+  const downloadPDF = () => {
+    const doc = new jsPDF({ unit: 'mm', format: 'a4' });
+    const pageW = doc.internal.pageSize.getWidth();
+    const pageH = doc.internal.pageSize.getHeight();
+    const margin = 20;
+    const contentW = pageW - margin * 2;
+    let y = margin;
+
+    const addPage = () => {
+      doc.addPage();
+      y = margin;
+      // Footer on each page
+      doc.setFontSize(8);
+      doc.setTextColor(150, 150, 150);
+      doc.text('BlackAI | blackai.in | info@blackai.in | +91 9975473730', pageW / 2, pageH - 10, { align: 'center' });
+      doc.text(`Page ${doc.getNumberOfPages()}`, pageW - margin, pageH - 10, { align: 'right' });
+    };
+
+    const checkPageBreak = (needed: number) => {
+      if (y + needed > pageH - 20) addPage();
+    };
+
+    const addWrappedText = (text: string, x: number, fontSize: number, color: [number, number, number], maxWidth: number, lineHeight: number) => {
+      doc.setFontSize(fontSize);
+      doc.setTextColor(...color);
+      const lines = doc.splitTextToSize(text, maxWidth);
+      lines.forEach((line: string) => {
+        checkPageBreak(lineHeight);
+        doc.text(line, x, y);
+        y += lineHeight;
+      });
+    };
+
+    // ── HEADER ──
+    // Gold top bar
+    doc.setFillColor(255, 204, 0);
+    doc.rect(0, 0, pageW, 2, 'F');
+
+    // Logo text
+    doc.setFontSize(28);
+    doc.setFont('helvetica', 'bold');
+    doc.setTextColor(255, 255, 255);
+    doc.text('Black', margin, y + 12);
+    doc.setTextColor(255, 204, 0);
+    doc.text('AI', margin + 30, y + 12);
+
+    // Website
+    doc.setFontSize(9);
+    doc.setFont('helvetica', 'normal');
+    doc.setTextColor(150, 150, 150);
+    doc.text('blackai.in', pageW - margin, y + 8, { align: 'right' });
+    doc.text('info@blackai.in', pageW - margin, y + 14, { align: 'right' });
+
+    y += 22;
+
+    // Divider
+    doc.setDrawColor(255, 204, 0);
+    doc.setLineWidth(0.5);
+    doc.line(margin, y, pageW - margin, y);
+    y += 8;
+
+    // Title
+    doc.setFontSize(22);
+    doc.setFont('helvetica', 'bold');
+    doc.setTextColor(255, 255, 255);
+    doc.text('TERMS OF SERVICE', pageW / 2, y, { align: 'center' });
+    y += 8;
+
+    // Date
+    doc.setFontSize(9);
+    doc.setFont('helvetica', 'normal');
+    doc.setTextColor(150, 150, 150);
+    doc.text('Effective Date: July 14, 2025  |  Nagpur, Maharashtra, India', pageW / 2, y, { align: 'center' });
+    y += 10;
+
+    // Divider
+    doc.setDrawColor(50, 50, 50);
+    doc.setLineWidth(0.3);
+    doc.line(margin, y, pageW - margin, y);
+    y += 8;
+
+    // Intro
+    doc.setFontSize(10);
+    doc.setFont('helvetica', 'normal');
+    doc.setTextColor(180, 180, 180);
+    const intro = 'Welcome to BlackAI. These Terms of Service govern your access to and use of our AI solutions, services, and website. By using our services, you enter into a legally binding agreement with BlackAI. Please read these terms carefully before using our services.';
+    const introLines = doc.splitTextToSize(intro, contentW);
+    introLines.forEach((line: string) => {
+      checkPageBreak(6);
+      doc.text(line, margin, y);
+      y += 6;
+    });
+    y += 6;
+
+    // ── SECTIONS ──
+    sections.forEach((section, sectionIdx) => {
+      checkPageBreak(16);
+
+      // Section number + title background
+      doc.setFillColor(30, 30, 30);
+      doc.roundedRect(margin, y - 4, contentW, 12, 2, 2, 'F');
+      doc.setDrawColor(255, 204, 0);
+      doc.setLineWidth(0.4);
+      doc.line(margin, y - 4, margin, y + 8);
+
+      doc.setFontSize(12);
+      doc.setFont('helvetica', 'bold');
+      doc.setTextColor(255, 204, 0);
+      doc.text(`${sectionIdx + 1}.`, margin + 4, y + 4);
+      doc.setTextColor(255, 255, 255);
+      doc.text(section.title.toUpperCase(), margin + 14, y + 4);
+      y += 14;
+
+      // Clauses
+      section.content.forEach((item, itemIdx) => {
+        checkPageBreak(12);
+
+        // Clause number + subtitle
+        doc.setFontSize(10);
+        doc.setFont('helvetica', 'bold');
+        doc.setTextColor(255, 204, 0);
+        doc.text(`${sectionIdx + 1}.${itemIdx + 1}`, margin + 4, y);
+        doc.setTextColor(220, 220, 220);
+        doc.text(item.subtitle, margin + 18, y);
+        y += 6;
+
+        // Clause text
+        doc.setFontSize(9.5);
+        doc.setFont('helvetica', 'normal');
+        doc.setTextColor(160, 160, 160);
+        const textLines = doc.splitTextToSize(item.text, contentW - 8);
+        textLines.forEach((line: string) => {
+          checkPageBreak(5.5);
+          doc.text(line, margin + 8, y);
+          y += 5.5;
+        });
+        y += 4;
+      });
+
+      y += 4;
+    });
+
+    // ── FOOTER LAST PAGE ──
+    doc.setDrawColor(255, 204, 0);
+    doc.setLineWidth(0.5);
+    doc.line(margin, y, pageW - margin, y);
+    y += 6;
+    doc.setFontSize(8);
+    doc.setFont('helvetica', 'normal');
+    doc.setTextColor(120, 120, 120);
+    doc.text('This document is legally binding. For queries contact: legal@blackai.in', pageW / 2, y, { align: 'center' });
+    y += 5;
+    doc.text('© ' + new Date().getFullYear() + ' BlackAI. All rights reserved. | blackai.in', pageW / 2, y, { align: 'center' });
+
+    // Footer on all pages
+    const totalPages = doc.getNumberOfPages();
+    for (let i = 1; i <= totalPages; i++) {
+      doc.setPage(i);
+      doc.setFontSize(8);
+      doc.setTextColor(100, 100, 100);
+      doc.text('BlackAI | blackai.in | info@blackai.in | +91 9975473730', pageW / 2, pageH - 10, { align: 'center' });
+      doc.text(`Page ${i} of ${totalPages}`, pageW - margin, pageH - 10, { align: 'right' });
+      // Gold bottom bar
+      doc.setFillColor(255, 204, 0);
+      doc.rect(0, pageH - 2, pageW, 2, 'F');
+    }
+
+    doc.save('BlackAI-Terms-of-Service.pdf');
+  };
+
   const toggleSection = (sectionId: string) => {
     setExpandedSections(prev =>
       prev.includes(sectionId)
@@ -413,7 +590,14 @@ const TermsOfService = () => {
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto">
             {/* Expand/Collapse All Button */}
-            <div className="flex justify-end mb-6">
+            <div className="flex justify-between items-center mb-6">
+              <button
+                onClick={downloadPDF}
+                className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-background bg-accent hover:bg-accent/90 rounded-lg transition-all"
+              >
+                <Download className="w-4 h-4" />
+                Download PDF
+              </button>
               {expandedSections.length === filteredSections.length && filteredSections.length > 0 ? (
                 <button
                   onClick={collapseAll}
@@ -471,6 +655,7 @@ const TermsOfService = () => {
                               <div key={idx}>
                                 <h3 className="text-lg font-semibold mb-2 text-foreground">{item.subtitle}</h3>
                                 <p className="text-muted-foreground leading-relaxed">{item.text}</p>
+                                {(item as any).hasCalculator && <PenaltyCalculator />}
                               </div>
                             ))}
                           </motion.div>

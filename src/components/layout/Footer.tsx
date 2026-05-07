@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowUpRight, Linkedin, Instagram, X } from 'lucide-react';
 import AnimatedLogo from '@/components/shared/AnimatedLogo';
@@ -15,6 +15,10 @@ const footerLinks = {
     { name: 'Custom AI Agents', path: '/services#agents' },
     { name: 'Workflow Automation', path: '/services#automation' },
     { name: 'AI Consultation', path: '/services#consultation' },
+    { name: 'Website Development', path: '/contact?service=Website+Development' },
+    { name: 'AI Deployment & Integration', path: '/contact?service=AI+Deployment+%26+Integration' },
+    { name: 'AI SEO Boost', path: '/contact?service=AI+SEO+Boost' },
+    { name: 'AI Chatbot Development', path: '/contact?service=AI+Chatbot+Development' },
   ],
   social: [
     { name: 'LinkedIn', icon: Linkedin, href: 'https://www.linkedin.com/company/blackaii/' },
@@ -32,6 +36,19 @@ const footerLinks = {
 };
 
 export const Footer = () => {
+  const navigate = useNavigate();
+
+  const handleServiceClick = (path: string) => {
+    if (path.includes('#')) {
+      const [route, hash] = path.split('#');
+      navigate(route);
+      setTimeout(() => {
+        document.getElementById(hash)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 300);
+    } else {
+      navigate(path);
+    }
+  };
   return (
     <footer className="relative border-t border-border/50 bg-background">
       {/* Gradient overlay */}
@@ -94,13 +111,13 @@ export const Footer = () => {
             <ul className="space-y-3">
               {footerLinks.services.map((link) => (
                 <li key={link.path}>
-                  <Link
-                    to={link.path}
-                    className="text-muted-foreground hover:text-foreground transition-colors text-sm flex items-center gap-1 group"
+                  <button
+                    onClick={() => handleServiceClick(link.path)}
+                    className="text-muted-foreground hover:text-foreground transition-colors text-sm flex items-center gap-1 group text-left"
                   >
                     {link.name}
                     <ArrowUpRight size={14} className="opacity-0 group-hover:opacity-100 transition-opacity" />
-                  </Link>
+                  </button>
                 </li>
               ))}
             </ul>

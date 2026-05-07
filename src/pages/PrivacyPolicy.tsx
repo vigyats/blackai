@@ -2,11 +2,12 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLocation } from 'react-router-dom';
-import { Search, Shield, Lock, Eye, Database, UserCheck, FileText, AlertCircle, Mail, ChevronDown } from 'lucide-react';
+import { Search, Shield, Lock, Eye, Database, UserCheck, FileText, AlertCircle, Mail, ChevronDown, Download } from 'lucide-react';
 import { Layout } from '@/components/layout/Layout';
 import { AnimatedSection } from '@/components/shared/AnimatedSection';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
+import jsPDF from 'jspdf';
 
 const sections = [
   {
@@ -169,18 +170,100 @@ const PrivacyPolicy = () => {
 
   const toggleSection = (sectionId: string) => {
     setExpandedSections(prev =>
-      prev.includes(sectionId)
-        ? prev.filter(id => id !== sectionId)
-        : [...prev, sectionId]
+      prev.includes(sectionId) ? prev.filter(id => id !== sectionId) : [...prev, sectionId]
     );
   };
 
-  const expandAll = () => {
-    setExpandedSections(sections.map(s => s.id));
-  };
+  const expandAll = () => setExpandedSections(sections.map(s => s.id));
+  const collapseAll = () => setExpandedSections([]);
 
-  const collapseAll = () => {
-    setExpandedSections([]);
+  const downloadPDF = () => {
+    const doc = new jsPDF({ unit: 'mm', format: 'a4' });
+    const pageW = doc.internal.pageSize.getWidth();
+    const pageH = doc.internal.pageSize.getHeight();
+    const margin = 20;
+    const contentW = pageW - margin * 2;
+    let y = margin;
+
+    const addPage = () => { doc.addPage(); y = margin; };
+    const checkPageBreak = (needed: number) => { if (y + needed > pageH - 20) addPage(); };
+
+    // Gold top bar
+    doc.setFillColor(255, 204, 0);
+    doc.rect(0, 0, pageW, 2, 'F');
+
+    // Logo
+    doc.setFontSize(28); doc.setFont('helvetica', 'bold');
+    doc.setTextColor(255, 255, 255); doc.text('Black', margin, y + 12);
+    doc.setTextColor(255, 204, 0); doc.text('AI', margin + 30, y + 12);
+    doc.setFontSize(9); doc.setFont('helvetica', 'normal');
+    doc.setTextColor(150, 150, 150);
+    doc.text('blackai.in', pageW - margin, y + 8, { align: 'right' });
+    doc.text('info@blackai.in', pageW - margin, y + 14, { align: 'right' });
+    y += 22;
+
+    doc.setDrawColor(255, 204, 0); doc.setLineWidth(0.5);
+    doc.line(margin, y, pageW - margin, y); y += 8;
+
+    doc.setFontSize(22); doc.setFont('helvetica', 'bold');
+    doc.setTextColor(255, 255, 255);
+    doc.text('PRIVACY POLICY', pageW / 2, y, { align: 'center' }); y += 8;
+    doc.setFontSize(9); doc.setFont('helvetica', 'normal');
+    doc.setTextColor(150, 150, 150);
+    doc.text('Effective Date: July 14, 2025  |  Nagpur, Maharashtra, India', pageW / 2, y, { align: 'center' }); y += 10;
+    doc.setDrawColor(50, 50, 50); doc.setLineWidth(0.3);
+    doc.line(margin, y, pageW - margin, y); y += 8;
+
+    doc.setFontSize(10); doc.setFont('helvetica', 'normal');
+    doc.setTextColor(180, 180, 180);
+    const intro = 'At BlackAI, we are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our AI solutions, services, and website.';
+    const introLines = doc.splitTextToSize(intro, contentW);
+    introLines.forEach((line: string) => { checkPageBreak(6); doc.text(line, margin, y); y += 6; });
+    y += 6;
+
+    sections.forEach((section, sectionIdx) => {
+      checkPageBreak(16);
+      doc.setFillColor(30, 30, 30);
+      doc.roundedRect(margin, y - 4, contentW, 12, 2, 2, 'F');
+      doc.setDrawColor(255, 204, 0); doc.setLineWidth(0.4);
+      doc.line(margin, y - 4, margin, y + 8);
+      doc.setFontSize(12); doc.setFont('helvetica', 'bold');
+      doc.setTextColor(255, 204, 0); doc.text(`${sectionIdx + 1}.`, margin + 4, y + 4);
+      doc.setTextColor(255, 255, 255); doc.text(section.title.toUpperCase(), margin + 14, y + 4);
+      y += 14;
+
+      section.content.forEach((item, itemIdx) => {
+        checkPageBreak(12);
+        doc.setFontSize(10); doc.setFont('helvetica', 'bold');
+        doc.setTextColor(255, 204, 0); doc.text(`${sectionIdx + 1}.${itemIdx + 1}`, margin + 4, y);
+        doc.setTextColor(220, 220, 220); doc.text(item.subtitle, margin + 18, y); y += 6;
+        doc.setFontSize(9.5); doc.setFont('helvetica', 'normal');
+        doc.setTextColor(160, 160, 160);
+        const textLines = doc.splitTextToSize(item.text, contentW - 8);
+        textLines.forEach((line: string) => { checkPageBreak(5.5); doc.text(line, margin + 8, y); y += 5.5; });
+        y += 4;
+      });
+      y += 4;
+    });
+
+    doc.setDrawColor(255, 204, 0); doc.setLineWidth(0.5);
+    doc.line(margin, y, pageW - margin, y); y += 6;
+    doc.setFontSize(8); doc.setFont('helvetica', 'normal');
+    doc.setTextColor(120, 120, 120);
+    doc.text('This document is legally binding. For queries contact: privacy@blackai.in', pageW / 2, y, { align: 'center' }); y += 5;
+    doc.text('\u00a9 ' + new Date().getFullYear() + ' BlackAI. All rights reserved. | blackai.in', pageW / 2, y, { align: 'center' });
+
+    const totalPages = doc.getNumberOfPages();
+    for (let i = 1; i <= totalPages; i++) {
+      doc.setPage(i);
+      doc.setFontSize(8); doc.setTextColor(100, 100, 100);
+      doc.text('BlackAI | blackai.in | info@blackai.in | +91 9975473730', pageW / 2, pageH - 10, { align: 'center' });
+      doc.text(`Page ${i} of ${totalPages}`, pageW - margin, pageH - 10, { align: 'right' });
+      doc.setFillColor(255, 204, 0);
+      doc.rect(0, pageH - 2, pageW, 2, 'F');
+    }
+
+    doc.save('BlackAI-Privacy-Policy.pdf');
   };
 
   const filteredSections = sections.filter(section => {
@@ -267,19 +350,20 @@ const PrivacyPolicy = () => {
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto">
             {/* Expand/Collapse All Button */}
-            <div className="flex justify-end mb-6">
+            <div className="flex justify-between items-center mb-6">
+              <button
+                onClick={downloadPDF}
+                className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-background bg-accent hover:bg-accent/90 rounded-lg transition-all"
+              >
+                <Download className="w-4 h-4" />
+                Download PDF
+              </button>
               {expandedSections.length === filteredSections.length && filteredSections.length > 0 ? (
-                <button
-                  onClick={collapseAll}
-                  className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground border border-border/50 rounded-lg hover:border-border transition-all"
-                >
+                <button onClick={collapseAll} className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground border border-border/50 rounded-lg hover:border-border transition-all">
                   Collapse All
                 </button>
               ) : (
-                <button
-                  onClick={expandAll}
-                  className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground border border-border/50 rounded-lg hover:border-border transition-all"
-                >
+                <button onClick={expandAll} className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground border border-border/50 rounded-lg hover:border-border transition-all">
                   Expand All
                 </button>
               )}

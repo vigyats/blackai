@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { useSearchParams } from 'react-router-dom';
 import { Mail, Phone, MapPin, Send, Linkedin, Instagram, X, CheckCircle } from 'lucide-react';
 import { Layout } from '@/components/layout/Layout';
 import { FloatingShapes } from '@/components/shared/FloatingShapes';
@@ -48,8 +49,10 @@ const socialLinks = [
 
 const Contact = () => {
   const { toast } = useToast();
+  const [searchParams] = useSearchParams();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [agreedToTerms, setAgreedToTerms] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -59,6 +62,22 @@ const Contact = () => {
     inquiryType: '',
     message: '',
   });
+
+  useEffect(() => {
+    const service = searchParams.get('service');
+    const inquiry = searchParams.get('inquiry');
+    if (service || inquiry) {
+      setFormData(prev => ({
+        ...prev,
+        service: service || prev.service,
+        inquiryType: inquiry || prev.inquiryType,
+      }));
+      // Scroll to form
+      setTimeout(() => {
+        document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 500);
+    }
+  }, [searchParams]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -173,7 +192,7 @@ ${formData.message}
           <div className="grid lg:grid-cols-2 gap-16">
             {/* Form */}
             <AnimatedSection>
-              <Card className="p-8 bg-card/50 border-border/50">
+              <Card id="contact-form" className="p-8 bg-card/50 border-border/50">
                 <h2 className="text-2xl font-display font-bold mb-6">Send a Message</h2>
                 
                 {isSubmitted ? (
@@ -315,10 +334,28 @@ ${formData.message}
                       />
                     </div>
 
+                    {/* Terms Agreement */}
+                    <div className="flex items-start gap-3 p-4 rounded-lg bg-secondary/20 border border-border/30">
+                      <input
+                        type="checkbox"
+                        id="agreeTerms"
+                        checked={agreedToTerms}
+                        onChange={(e) => setAgreedToTerms(e.target.checked)}
+                        className="mt-0.5 w-4 h-4 accent-yellow-400 cursor-pointer flex-shrink-0"
+                      />
+                      <label htmlFor="agreeTerms" className="text-sm text-muted-foreground cursor-pointer leading-relaxed">
+                        I have read and agree to the{' '}
+                        <Link to="/terms-of-service" target="_blank" className="font-bold text-foreground hover:text-accent underline underline-offset-2 transition-colors">Terms of Service</Link>
+                        {' '}and{' '}
+                        <Link to="/privacy-policy" target="_blank" className="font-bold text-foreground hover:text-accent underline underline-offset-2 transition-colors">Privacy Policy</Link>
+                        {' '}of BlackAI.
+                      </label>
+                    </div>
+
                     <Button
                       type="submit"
-                      disabled={isSubmitting}
-                      className="w-full bg-foreground text-background hover:bg-foreground/90 h-12"
+                      disabled={isSubmitting || !agreedToTerms}
+                      className="w-full bg-foreground text-background hover:bg-foreground/90 h-12 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
                     >
                       {isSubmitting ? (
                         <motion.div
