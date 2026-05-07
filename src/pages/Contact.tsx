@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { Mail, Phone, MapPin, Send, Linkedin, Instagram, X, CheckCircle } from 'lucide-react';
 import { Layout } from '@/components/layout/Layout';
 import { FloatingShapes } from '@/components/shared/FloatingShapes';
