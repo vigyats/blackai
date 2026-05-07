@@ -56,8 +56,8 @@ const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    phone: '',
     countryCode: '+91',
+    phone: '',
     company: '',
     service: '',
     inquiryType: '',
@@ -65,45 +65,39 @@ const Contact = () => {
   });
 
   const countryCodes = [
-    { code: '+91', country: 'IN' },
-    { code: '+1', country: 'US/CA' },
-    { code: '+44', country: 'UK' },
-    { code: '+61', country: 'AU' },
-    { code: '+971', country: 'UAE' },
-    { code: '+65', country: 'SG' },
-    { code: '+49', country: 'DE' },
-    { code: '+33', country: 'FR' },
-    { code: '+81', country: 'JP' },
-    { code: '+86', country: 'CN' },
-    { code: '+7', country: 'RU' },
-    { code: '+55', country: 'BR' },
-    { code: '+27', country: 'ZA' },
-    { code: '+234', country: 'NG' },
-    { code: '+92', country: 'PK' },
-    { code: '+880', country: 'BD' },
-    { code: '+94', country: 'LK' },
-    { code: '+977', country: 'NP' },
-    { code: '+60', country: 'MY' },
-    { code: '+62', country: 'ID' },
-    { code: '+63', country: 'PH' },
-    { code: '+66', country: 'TH' },
-    { code: '+82', country: 'KR' },
-    { code: '+39', country: 'IT' },
-    { code: '+34', country: 'ES' },
-    { code: '+31', country: 'NL' },
-    { code: '+46', country: 'SE' },
-    { code: '+47', country: 'NO' },
-    { code: '+45', country: 'DK' },
-    { code: '+41', country: 'CH' },
-    { code: '+48', country: 'PL' },
-    { code: '+90', country: 'TR' },
-    { code: '+20', country: 'EG' },
-    { code: '+966', country: 'SA' },
-    { code: '+972', country: 'IL' },
-    { code: '+52', country: 'MX' },
-    { code: '+54', country: 'AR' },
-    { code: '+56', country: 'CL' },
-    { code: '+57', country: 'CO' },
+    { code: '+91', label: '🇮🇳 +91' },
+    { code: '+1', label: '🇺🇸 +1' },
+    { code: '+44', label: '🇬🇧 +44' },
+    { code: '+61', label: '🇦🇺 +61' },
+    { code: '+971', label: '🇦🇪 +971' },
+    { code: '+65', label: '🇸🇬 +65' },
+    { code: '+49', label: '🇩🇪 +49' },
+    { code: '+33', label: '🇫🇷 +33' },
+    { code: '+81', label: '🇯🇵 +81' },
+    { code: '+86', label: '🇨🇳 +86' },
+    { code: '+7', label: '🇷🇺 +7' },
+    { code: '+55', label: '🇧🇷 +55' },
+    { code: '+27', label: '🇿🇦 +27' },
+    { code: '+92', label: '🇵🇰 +92' },
+    { code: '+880', label: '🇧🇩 +880' },
+    { code: '+94', label: '🇱🇰 +94' },
+    { code: '+977', label: '🇳🇵 +977' },
+    { code: '+60', label: '🇲🇾 +60' },
+    { code: '+62', label: '🇮🇩 +62' },
+    { code: '+63', label: '🇵🇭 +63' },
+    { code: '+66', label: '🇹🇭 +66' },
+    { code: '+82', label: '🇰🇷 +82' },
+    { code: '+39', label: '🇮🇹 +39' },
+    { code: '+34', label: '🇪🇸 +34' },
+    { code: '+31', label: '🇳🇱 +31' },
+    { code: '+46', label: '🇸🇪 +46' },
+    { code: '+41', label: '🇨🇭 +41' },
+    { code: '+48', label: '🇵🇱 +48' },
+    { code: '+90', label: '🇹🇷 +90' },
+    { code: '+20', label: '🇪🇬 +20' },
+    { code: '+966', label: '🇸🇦 +966' },
+    { code: '+52', label: '🇲🇽 +52' },
+    { code: '+54', label: '🇦🇷 +54' },
   ];
 
   useEffect(() => {
@@ -289,15 +283,27 @@ ${formData.message}
                       <label htmlFor="phone" className="block text-sm font-medium mb-2">
                         Phone <span className="text-muted-foreground">(optional)</span>
                       </label>
-                      <Input
-                        id="phone"
-                        name="phone"
-                        type="tel"
-                        value={formData.phone}
-                        onChange={handleInputChange}
-                        placeholder="+91 XXXXX XXXXX"
-                        className="bg-background/50 border-border/50 focus:border-accent"
-                      />
+                      <div className="flex gap-2">
+                        <select
+                          name="countryCode"
+                          value={formData.countryCode}
+                          onChange={handleInputChange as any}
+                          className="w-28 h-10 px-2 rounded-md bg-background/50 border border-border/50 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent text-sm flex-shrink-0"
+                        >
+                          {countryCodes.map(c => (
+                            <option key={c.code} value={c.code}>{c.label}</option>
+                          ))}
+                        </select>
+                        <Input
+                          id="phone"
+                          name="phone"
+                          type="tel"
+                          value={formData.phone}
+                          onChange={handleInputChange}
+                          placeholder="XXXXX XXXXX"
+                          className="bg-background/50 border-border/50 focus:border-accent flex-1"
+                        />
+                      </div>
                     </div>
 
                     <div>

@@ -337,7 +337,7 @@ const TermsOfService = () => {
 
     // ── HEADER ──
     // Gold top bar
-    doc.setFillColor(255, 204, 0);
+    doc.setFillColor(212, 160, 0);
     doc.rect(0, 0, pageW, 2, 'F');
 
     // Logo text
@@ -345,7 +345,7 @@ const TermsOfService = () => {
     doc.setFont('helvetica', 'bold');
     doc.setTextColor(20, 20, 20);
     doc.text('Black', margin, y + 12);
-    doc.setTextColor(180, 130, 0);
+    doc.setTextColor(212, 160, 0);
     doc.text('AI', margin + 30, y + 12);
 
     // Website
@@ -358,7 +358,7 @@ const TermsOfService = () => {
     y += 22;
 
     // Divider
-    doc.setDrawColor(255, 204, 0);
+    doc.setDrawColor(212, 160, 0);
     doc.setLineWidth(0.5);
     doc.line(margin, y, pageW - margin, y);
     y += 8;
@@ -403,13 +403,13 @@ const TermsOfService = () => {
       // Section number + title background
       doc.setFillColor(240, 240, 240);
       doc.roundedRect(margin, y - 4, contentW, 12, 2, 2, 'F');
-      doc.setDrawColor(180, 130, 0);
+      doc.setDrawColor(212, 160, 0);
       doc.setLineWidth(0.4);
       doc.line(margin, y - 4, margin, y + 8);
 
       doc.setFontSize(12);
       doc.setFont('helvetica', 'bold');
-      doc.setTextColor(180, 130, 0);
+      doc.setTextColor(212, 160, 0);
       doc.text(`${sectionIdx + 1}.`, margin + 4, y + 4);
       doc.setTextColor(20, 20, 20);
       doc.text(section.title.toUpperCase(), margin + 14, y + 4);
@@ -422,7 +422,7 @@ const TermsOfService = () => {
         // Clause number + subtitle
         doc.setFontSize(10);
         doc.setFont('helvetica', 'bold');
-        doc.setTextColor(180, 130, 0);
+        doc.setTextColor(212, 160, 0);
         doc.text(`${sectionIdx + 1}.${itemIdx + 1}`, margin + 4, y);
         doc.setTextColor(20, 20, 20);
         doc.text(item.subtitle, margin + 18, y);
@@ -464,7 +464,7 @@ const TermsOfService = () => {
       doc.setTextColor(100, 100, 100);
       doc.text('BlackAI | blackai.in | info@blackai.in | +91 9975473730', pageW / 2, pageH - 10, { align: 'center' });
       doc.text(`Page ${i} of ${totalPages}`, pageW - margin, pageH - 10, { align: 'right' });
-      doc.setFillColor(180, 130, 0);
+      doc.setFillColor(212, 160, 0);
       doc.rect(0, pageH - 2, pageW, 2, 'F');
     }
 
