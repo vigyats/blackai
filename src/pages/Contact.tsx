@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Link, useSearchParams } from 'react-router-dom';
-import { Mail, Phone, MapPin, Send, Linkedin, Instagram, X, CheckCircle } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, Linkedin, Instagram, X, CheckCircle, ChevronDown, Search } from 'lucide-react';
 import { Layout } from '@/components/layout/Layout';
 import { FloatingShapes } from '@/components/shared/FloatingShapes';
 import { AnimatedSection } from '@/components/shared/AnimatedSection';
@@ -46,6 +46,127 @@ const socialLinks = [
   },
   { icon: Instagram, label: 'Instagram', href: 'https://www.instagram.com/blackai_in?igsh=MXUzY3oxa3Bmb2Z5cQ==' },
 ];
+
+const serviceOptions = [
+  'Custom AI Agents',
+  'AI Workflow Automation',
+  'AI Consultation & Integration',
+  'Generative AI Solutions',
+  'Website Development',
+  'AI Website Integration',
+  'Product Building',
+  'AI Deployment & Integration',
+  'AI SEO Boost',
+  'AI Chatbot Development',
+  'AI Content Generation',
+  'Custom Web Applications',
+  'Other',
+];
+
+const inquiryOptions = [
+  'Product/Service Inquiry',
+  'Collaboration Opportunity',
+  'Join Our Team',
+  'Partnership',
+  'General Inquiry',
+];
+
+interface SearchableDropdownProps {
+  label: string;
+  placeholder: string;
+  options: string[];
+  value: string;
+  onChange: (val: string) => void;
+}
+
+const SearchableDropdown = ({ label, placeholder, options, value, onChange }: SearchableDropdownProps) => {
+  const [query, setQuery] = useState('');
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  const filtered = options.filter(o => o.toLowerCase().includes(query.toLowerCase()));
+
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+    };
+    document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
+  }, []);
+
+  const handleSelect = (option: string) => {
+    onChange(option);
+    setQuery('');
+    setOpen(false);
+  };
+
+  return (
+    <div ref={ref} className="relative">
+      <label className="block text-sm font-medium mb-2">
+        {label} <span className="text-muted-foreground">(optional)</span>
+      </label>
+      <div
+        className={`flex items-center h-10 px-3 rounded-md bg-background/50 border ${
+          open ? 'border-accent ring-1 ring-accent' : 'border-border/50'
+        } cursor-pointer transition-all`}
+        onClick={() => setOpen(o => !o)}
+      >
+        {open ? (
+          <div className="flex items-center gap-2 w-full" onClick={e => e.stopPropagation()}>
+            <Search className="w-3.5 h-3.5 text-muted-foreground flex-shrink-0" />
+            <input
+              autoFocus
+              value={query}
+              onChange={e => setQuery(e.target.value)}
+              placeholder="Type to search..."
+              className="bg-transparent text-sm outline-none w-full text-foreground placeholder:text-muted-foreground"
+            />
+          </div>
+        ) : (
+          <span className={`text-sm flex-1 truncate ${value ? 'text-foreground' : 'text-muted-foreground'}`}>
+            {value || placeholder}
+          </span>
+        )}
+        <motion.div animate={{ rotate: open ? 180 : 0 }} transition={{ duration: 0.2 }}>
+          <ChevronDown className="w-4 h-4 text-muted-foreground ml-2 flex-shrink-0" />
+        </motion.div>
+      </div>
+
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0, y: -6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.15 }}
+            className="absolute z-50 w-full mt-1 bg-card border border-border/50 rounded-lg shadow-xl overflow-hidden"
+          >
+            <div className="max-h-52 overflow-y-auto">
+              {filtered.length > 0 ? (
+                filtered.map(option => (
+                  <div
+                    key={option}
+                    onClick={() => handleSelect(option)}
+                    className={`px-4 py-2.5 text-sm cursor-pointer transition-colors flex items-center gap-2 ${
+                      value === option
+                        ? 'bg-accent/15 text-accent font-medium'
+                        : 'text-foreground hover:bg-secondary/50'
+                    }`}
+                  >
+                    {value === option && <span className="w-1.5 h-1.5 rounded-full bg-accent flex-shrink-0" />}
+                    {option}
+                  </div>
+                ))
+              ) : (
+                <div className="px-4 py-3 text-sm text-muted-foreground">No results found</div>
+              )}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+};
 
 const Contact = () => {
   const { toast } = useToast();
@@ -321,52 +442,20 @@ ${formData.message}
                     </div>
 
                     <div className="grid sm:grid-cols-2 gap-4">
-                      <div>
-                        <label htmlFor="service" className="block text-sm font-medium mb-2">
-                          Service Interested <span className="text-muted-foreground">(optional)</span>
-                        </label>
-                        <select
-                          id="service"
-                          name="service"
-                          value={formData.service}
-                          onChange={handleInputChange as any}
-                          className="w-full h-10 px-3 rounded-md bg-background/50 border border-border/50 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent text-sm"
-                        >
-                          <option value="">Select a service</option>
-                          <option value="Custom AI Agents">Custom AI Agents</option>
-                          <option value="AI Workflow Automation">AI Workflow Automation</option>
-                          <option value="AI Consultation">AI Consultation &amp; Integration</option>
-                          <option value="Generative AI Solutions">Generative AI Solutions</option>
-                          <option value="Website Development">Website Development</option>
-                          <option value="AI Website Integration">AI Website Integration</option>
-                          <option value="Product Building">Product Building</option>
-                          <option value="AI Deployment & Integration">AI Deployment &amp; Integration</option>
-                          <option value="AI SEO Boost">AI SEO Boost</option>
-                          <option value="AI Chatbot Development">AI Chatbot Development</option>
-                          <option value="AI Content Generation">AI Content Generation</option>
-                          <option value="Custom Web Applications">Custom Web Applications</option>
-                          <option value="Other">Other</option>
-                        </select>
-                      </div>
-                      <div>
-                        <label htmlFor="inquiryType" className="block text-sm font-medium mb-2">
-                          Inquiry Type <span className="text-muted-foreground">(optional)</span>
-                        </label>
-                        <select
-                          id="inquiryType"
-                          name="inquiryType"
-                          value={formData.inquiryType}
-                          onChange={handleInputChange as any}
-                          className="w-full h-10 px-3 rounded-md bg-background/50 border border-border/50 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent text-sm"
-                        >
-                          <option value="">Select inquiry type</option>
-                          <option value="Product/Service Inquiry">Product/Service Inquiry</option>
-                          <option value="Collaboration Opportunity">Collaboration Opportunity</option>
-                          <option value="Join Our Team">Join Our Team</option>
-                          <option value="Partnership">Partnership</option>
-                          <option value="General Inquiry">General Inquiry</option>
-                        </select>
-                      </div>
+                      <SearchableDropdown
+                        label="Service Interested"
+                        placeholder="Select a service"
+                        options={serviceOptions}
+                        value={formData.service}
+                        onChange={(val) => setFormData(prev => ({ ...prev, service: val }))}
+                      />
+                      <SearchableDropdown
+                        label="Inquiry Type"
+                        placeholder="Select inquiry type"
+                        options={inquiryOptions}
+                        value={formData.inquiryType}
+                        onChange={(val) => setFormData(prev => ({ ...prev, inquiryType: val }))}
+                      />
                     </div>
 
                     <div>
