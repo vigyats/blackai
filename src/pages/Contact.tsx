@@ -57,11 +57,54 @@ const Contact = () => {
     name: '',
     email: '',
     phone: '',
+    countryCode: '+91',
     company: '',
     service: '',
     inquiryType: '',
     message: '',
   });
+
+  const countryCodes = [
+    { code: '+91', country: 'IN' },
+    { code: '+1', country: 'US/CA' },
+    { code: '+44', country: 'UK' },
+    { code: '+61', country: 'AU' },
+    { code: '+971', country: 'UAE' },
+    { code: '+65', country: 'SG' },
+    { code: '+49', country: 'DE' },
+    { code: '+33', country: 'FR' },
+    { code: '+81', country: 'JP' },
+    { code: '+86', country: 'CN' },
+    { code: '+7', country: 'RU' },
+    { code: '+55', country: 'BR' },
+    { code: '+27', country: 'ZA' },
+    { code: '+234', country: 'NG' },
+    { code: '+92', country: 'PK' },
+    { code: '+880', country: 'BD' },
+    { code: '+94', country: 'LK' },
+    { code: '+977', country: 'NP' },
+    { code: '+60', country: 'MY' },
+    { code: '+62', country: 'ID' },
+    { code: '+63', country: 'PH' },
+    { code: '+66', country: 'TH' },
+    { code: '+82', country: 'KR' },
+    { code: '+39', country: 'IT' },
+    { code: '+34', country: 'ES' },
+    { code: '+31', country: 'NL' },
+    { code: '+46', country: 'SE' },
+    { code: '+47', country: 'NO' },
+    { code: '+45', country: 'DK' },
+    { code: '+41', country: 'CH' },
+    { code: '+48', country: 'PL' },
+    { code: '+90', country: 'TR' },
+    { code: '+20', country: 'EG' },
+    { code: '+966', country: 'SA' },
+    { code: '+972', country: 'IL' },
+    { code: '+52', country: 'MX' },
+    { code: '+54', country: 'AR' },
+    { code: '+56', country: 'CL' },
+    { code: '+57', country: 'CO' },
+  ];
 
   useEffect(() => {
     const service = searchParams.get('service');
@@ -79,7 +122,7 @@ const Contact = () => {
     }
   }, [searchParams]);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
@@ -98,7 +141,7 @@ const Contact = () => {
         message: `
 Name: ${formData.name}
 Email: ${formData.email}
-Phone: ${formData.phone || 'Not provided'}
+Phone: ${formData.phone ? formData.countryCode + ' ' + formData.phone : 'Not provided'}
 Company: ${formData.company || 'Not provided'}
 Service Interested: ${formData.service || 'Not specified'}
 Inquiry Type: ${formData.inquiryType || 'Not specified'}
@@ -128,7 +171,7 @@ ${formData.message}
 
         // Reset form after a delay
         setTimeout(() => {
-          setFormData({ name: '', email: '', phone: '', company: '', service: '', inquiryType: '', message: '' });
+          setFormData({ name: '', email: '', phone: '', countryCode: '+91', company: '', service: '', inquiryType: '', message: '' });
           setIsSubmitted(false);
         }, 3000);
       } else {
@@ -285,11 +328,13 @@ ${formData.message}
                         >
                           <option value="">Select a service</option>
                           <option value="Custom AI Agents">Custom AI Agents</option>
-                          <option value="Workflow Automation">Workflow Automation</option>
-                          <option value="AI Consultation">AI Consultation</option>
+                          <option value="AI Workflow Automation">AI Workflow Automation</option>
+                          <option value="AI Consultation">AI Consultation &amp; Integration</option>
+                          <option value="Generative AI Solutions">Generative AI Solutions</option>
                           <option value="Website Development">Website Development</option>
-                          <option value="AI Deployment & Integration">AI Deployment & Integration</option>
                           <option value="AI Website Integration">AI Website Integration</option>
+                          <option value="Product Building">Product Building</option>
+                          <option value="AI Deployment & Integration">AI Deployment &amp; Integration</option>
                           <option value="AI SEO Boost">AI SEO Boost</option>
                           <option value="AI Chatbot Development">AI Chatbot Development</option>
                           <option value="AI Content Generation">AI Content Generation</option>

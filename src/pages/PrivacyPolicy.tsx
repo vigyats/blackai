@@ -194,28 +194,28 @@ const PrivacyPolicy = () => {
 
     // Logo
     doc.setFontSize(28); doc.setFont('helvetica', 'bold');
-    doc.setTextColor(255, 255, 255); doc.text('Black', margin, y + 12);
-    doc.setTextColor(255, 204, 0); doc.text('AI', margin + 30, y + 12);
+    doc.setTextColor(20, 20, 20); doc.text('Black', margin, y + 12);
+    doc.setTextColor(180, 130, 0); doc.text('AI', margin + 30, y + 12);
     doc.setFontSize(9); doc.setFont('helvetica', 'normal');
-    doc.setTextColor(150, 150, 150);
+    doc.setTextColor(100, 100, 100);
     doc.text('blackai.in', pageW - margin, y + 8, { align: 'right' });
     doc.text('info@blackai.in', pageW - margin, y + 14, { align: 'right' });
     y += 22;
 
-    doc.setDrawColor(255, 204, 0); doc.setLineWidth(0.5);
+    doc.setDrawColor(180, 130, 0); doc.setLineWidth(0.5);
     doc.line(margin, y, pageW - margin, y); y += 8;
 
     doc.setFontSize(22); doc.setFont('helvetica', 'bold');
-    doc.setTextColor(255, 255, 255);
+    doc.setTextColor(20, 20, 20);
     doc.text('PRIVACY POLICY', pageW / 2, y, { align: 'center' }); y += 8;
     doc.setFontSize(9); doc.setFont('helvetica', 'normal');
-    doc.setTextColor(150, 150, 150);
+    doc.setTextColor(100, 100, 100);
     doc.text('Effective Date: July 14, 2025  |  Nagpur, Maharashtra, India', pageW / 2, y, { align: 'center' }); y += 10;
-    doc.setDrawColor(50, 50, 50); doc.setLineWidth(0.3);
+    doc.setDrawColor(180, 180, 180); doc.setLineWidth(0.3);
     doc.line(margin, y, pageW - margin, y); y += 8;
 
     doc.setFontSize(10); doc.setFont('helvetica', 'normal');
-    doc.setTextColor(180, 180, 180);
+    doc.setTextColor(60, 60, 60);
     const intro = 'At BlackAI, we are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our AI solutions, services, and website.';
     const introLines = doc.splitTextToSize(intro, contentW);
     introLines.forEach((line: string) => { checkPageBreak(6); doc.text(line, margin, y); y += 6; });
@@ -223,22 +223,22 @@ const PrivacyPolicy = () => {
 
     sections.forEach((section, sectionIdx) => {
       checkPageBreak(16);
-      doc.setFillColor(30, 30, 30);
+      doc.setFillColor(240, 240, 240);
       doc.roundedRect(margin, y - 4, contentW, 12, 2, 2, 'F');
-      doc.setDrawColor(255, 204, 0); doc.setLineWidth(0.4);
+      doc.setDrawColor(180, 130, 0); doc.setLineWidth(0.4);
       doc.line(margin, y - 4, margin, y + 8);
       doc.setFontSize(12); doc.setFont('helvetica', 'bold');
-      doc.setTextColor(255, 204, 0); doc.text(`${sectionIdx + 1}.`, margin + 4, y + 4);
-      doc.setTextColor(255, 255, 255); doc.text(section.title.toUpperCase(), margin + 14, y + 4);
+      doc.setTextColor(180, 130, 0); doc.text(`${sectionIdx + 1}.`, margin + 4, y + 4);
+      doc.setTextColor(20, 20, 20); doc.text(section.title.toUpperCase(), margin + 14, y + 4);
       y += 14;
 
       section.content.forEach((item, itemIdx) => {
         checkPageBreak(12);
         doc.setFontSize(10); doc.setFont('helvetica', 'bold');
-        doc.setTextColor(255, 204, 0); doc.text(`${sectionIdx + 1}.${itemIdx + 1}`, margin + 4, y);
-        doc.setTextColor(220, 220, 220); doc.text(item.subtitle, margin + 18, y); y += 6;
+        doc.setTextColor(180, 130, 0); doc.text(`${sectionIdx + 1}.${itemIdx + 1}`, margin + 4, y);
+        doc.setTextColor(20, 20, 20); doc.text(item.subtitle, margin + 18, y); y += 6;
         doc.setFontSize(9.5); doc.setFont('helvetica', 'normal');
-        doc.setTextColor(160, 160, 160);
+        doc.setTextColor(60, 60, 60);
         const textLines = doc.splitTextToSize(item.text, contentW - 8);
         textLines.forEach((line: string) => { checkPageBreak(5.5); doc.text(line, margin + 8, y); y += 5.5; });
         y += 4;
@@ -246,10 +246,10 @@ const PrivacyPolicy = () => {
       y += 4;
     });
 
-    doc.setDrawColor(255, 204, 0); doc.setLineWidth(0.5);
+    doc.setDrawColor(180, 130, 0); doc.setLineWidth(0.5);
     doc.line(margin, y, pageW - margin, y); y += 6;
     doc.setFontSize(8); doc.setFont('helvetica', 'normal');
-    doc.setTextColor(120, 120, 120);
+    doc.setTextColor(100, 100, 100);
     doc.text('This document is legally binding. For queries contact: privacy@blackai.in', pageW / 2, y, { align: 'center' }); y += 5;
     doc.text('\u00a9 ' + new Date().getFullYear() + ' BlackAI. All rights reserved. | blackai.in', pageW / 2, y, { align: 'center' });
 
@@ -259,7 +259,7 @@ const PrivacyPolicy = () => {
       doc.setFontSize(8); doc.setTextColor(100, 100, 100);
       doc.text('BlackAI | blackai.in | info@blackai.in | +91 9975473730', pageW / 2, pageH - 10, { align: 'center' });
       doc.text(`Page ${i} of ${totalPages}`, pageW - margin, pageH - 10, { align: 'right' });
-      doc.setFillColor(255, 204, 0);
+      doc.setFillColor(180, 130, 0);
       doc.rect(0, pageH - 2, pageW, 2, 'F');
     }
 
